@@ -1,0 +1,14 @@
+<div class="chatbot-list-container">
+    <div class="chatbot-card" *ngFor="let chatbot of chatbots" (click)="onChatbotClick(chatbot)">
+      <div class="chatbot-name">{{ chatbot.name }}</div>
+      <div class="chatbot-status" [ngClass]="chatbot.active ? 'active' : 'inactive'">
+        {{ chatbot.active ? 'Active' : 'Inactive' }}
+      </div>
+    </div>
+  
+    <div class="add-chatbot-card" (click)="addNewChatbot()">
+      <div class="add-icon">+</div>
+      <div class="add-text">Add New Chatbot</div>
+    </div>
+  </div>
+  
