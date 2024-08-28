@@ -1,3 +1,7 @@
+@import "src/styles/themes.scss";
+@import "src/styles/header.scss";
+@import "src/styles/modal.scss";
+
 .chatbot-list-container {
     display: flex;
     justify-content: space-around;

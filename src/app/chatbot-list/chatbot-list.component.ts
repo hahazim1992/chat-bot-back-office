@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { ChatbotService } from '../chatbot.service'; 
+import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-chatbot-list',
@@ -8,8 +10,18 @@ import { ChatbotService } from '../chatbot.service';
 })
 export class ChatbotListComponent implements OnInit {
   chatbots: any[] = [];
+  navigationLinks = ["chatbots"];
+  heading = "My Chatbots";
+  route: ActivatedRoute;
+  router: Router;
 
-  constructor(private chatbotService: ChatbotService) {}
+  goBackOneLevel = goBackOneLevel;
+  onClickBack = onClickBack;
+
+  constructor(private injector: Injector, private chatbotService: ChatbotService) {
+    this.route = injector.get<ActivatedRoute>(ActivatedRoute);
+    this.router = injector.get<Router>(Router);
+  }
 
   ngOnInit(): void {
     this.getChatbots();

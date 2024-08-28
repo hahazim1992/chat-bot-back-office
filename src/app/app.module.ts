@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppLandingComponent } from './app-landing/app-landing.component';
 import { CopyRightComponent } from './copy-right/copy-right.component';
 import { HeaderComponent } from './header/header.component';
+import { ChatbitAddEditComponent } from './chatbit-add-edit/chatbit-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HeaderComponent } from './header/header.component';
     ChatbotListComponent,
     AppLandingComponent,
     CopyRightComponent,
-    HeaderComponent
+    HeaderComponent,
+    ChatbitAddEditComponent
   ],
   imports: [
     BrowserModule,

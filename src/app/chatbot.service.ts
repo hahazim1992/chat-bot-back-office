@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatbotService {
-  private apiUrl = 'https://your-api-endpoint.com/api/chatbots'; // Replace with your API endpoint
+  private apiUrl = 'http://127.0.0.1:50000/chatbots';
 
   constructor(private http: HttpClient) {}
 
