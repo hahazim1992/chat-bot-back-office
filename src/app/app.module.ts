@@ -5,11 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChatbotListComponent } from './chatbot-list/chatbot-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AppLandingComponent } from './app-landing/app-landing.component';
+import { CopyRightComponent } from './copy-right/copy-right.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatbotListComponent
+    ChatbotListComponent,
+    AppLandingComponent,
+    CopyRightComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

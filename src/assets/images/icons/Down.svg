@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/24/Down</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.0031128,16.3735409 C11.803891,16.3735409 11.6046693,16.2988327 11.4521401,16.1463035 L4.25836571,8.955642 C3.95330734,8.65058364 3.95330734,8.15875484 4.25836571,7.85369647 C4.56342408,7.5486381 5.05525287,7.5486381 5.36031124,7.85369647 L12,14.4933852 L18.6396888,7.85369647 C18.9447471,7.5486381 19.4365759,7.5486381 19.7416343,7.85369647 C20.0466927,8.15875484 20.0466927,8.65058364 19.7416343,8.955642 L12.5509728,16.1431907 C12.3984436,16.2957199 12.1992218,16.3735409 12.0031128,16.3735409 Z" id="path-1"></path>
+    </defs>
+    <g id="Notes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1_Notes_Default_New" transform="translate(-678.000000, -223.000000)">
+            <g id="Icon/24/Down" transform="translate(678.000000, 223.000000)">
+                <g id="Icon/24/DownArrow">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="DownArrow" fill-rule="nonzero"></g>
+                    <g id="Colour/Basic/2_Secondary" mask="url(#mask-2)" fill="#403838" fill-rule="evenodd">
+                        <rect id="Rectangle-Copy" x="0" y="0" width="24" height="24"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

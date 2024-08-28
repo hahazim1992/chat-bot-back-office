@@ -1,0 +1,74 @@
+@import "src/styles/modal";
+@import "src/styles/themes";
+
+@media screen {
+  header {
+    height: $header-height;
+    width: 100%;
+    box-shadow: $box-shadow;
+    background-color: $basic-white;
+    z-index: $z-index-5;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+
+    &.param-header {
+      background-color: transparent;
+      box-shadow: none;
+
+      &-behind {
+        background-color: transparent;
+        box-shadow: none;
+        z-index: 0;
+      }
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        height: 1.3125rem;
+        width: auto;
+        padding: 0 1.5rem;
+      }
+
+      .logo-islamic {
+        height: 1.3125rem;
+      }
+
+      a {
+        display: block;
+        position: relative;
+        height: 24px; // px because icons are not to be scaled
+        width: 24px;
+      }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      color: $secondary-color;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-16;
+      cursor: pointer;
+    }
+
+    .param-header-right {
+      cursor: pointer;
+      right: 30px;
+      position: absolute;
+    }
+
+    .confidential {
+      display: none;
+    }
+  }
+}

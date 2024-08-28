@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Icon/24/Solid/Check Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11.9999999,3.99999995 C7.58124997,3.99999995 3.99999995,7.58124997 3.99999995,11.9999999 C3.99999995,16.41875 7.58124997,19.9999999 11.9999999,19.9999999 C16.41875,19.9999999 19.9999999,16.41875 19.9999999,11.9999999 C19.9999999,7.58124997 16.41875,3.99999995 11.9999999,3.99999995 Z M16.009375,9.81562499 L10.965625,15.053125 C10.846875,15.175 10.684375,15.24375 10.515625,15.24375 C10.5125,15.24375 10.5125,15.24375 10.509375,15.24375 C10.3375,15.24375 10.175,15.16875 10.05625,15.04375 L7.98124997,12.809375 C7.74687497,12.55625 7.76249997,12.1625 8.01249998,11.925 C8.26562498,11.690625 8.65937498,11.70625 8.89687498,11.95625 L10.521875,13.70625 L15.10625,8.94374998 C15.346875,8.69374998 15.740625,8.68749998 15.990625,8.92812498 C16.240625,9.17187498 16.25,9.56562498 16.009375,9.81562499 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/24/Solid/Check-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="CheckedSolid" fill-rule="nonzero"></g>
+        <g id="Colour/Basic/2_Secondary" mask="url(#mask-2)" fill="#75C67A">
+            <rect id="Rectangle-Copy" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

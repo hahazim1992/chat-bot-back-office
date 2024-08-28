@@ -1,0 +1,37 @@
+@import "~quill/dist/quill.snow.css";
+
+.ql-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.ql-toolbar.ql-snow {
+  border: 0;
+  border-top: 1px solid #ccc;
+  padding: 0.125rem;
+}
+
+.ql-container.ql-snow {
+  border: 0;
+}
+
+.ql-snow.ql-toolbar button,
+.ql-snow .ql-toolbar button {
+  height: 34px;
+  width: 34px;
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  margin-bottom: 1px;
+  bottom: 100%;
+  margin-top: unset;
+  top: unset;
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+  margin: 0 3rem;
+}
+
+.ql-editor {
+  padding: 0 0 0 15px;
+}

@@ -1,0 +1,731 @@
+/*******************
+Imports
+*******************/
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "font";
+@import "themes";
+@import "app-media";
+@import "quill-style";
+@import "buttons";
+@import "print";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+/*******************
+Global Styles
+*******************/
+@media screen {
+  body {
+    font-family: "Open Sans", sans-serif;
+    background: $body-color;
+    margin: 0;
+    overflow: hidden;
+    color: $dark-grey;
+    height: 100vh;
+  }
+
+  html {
+    position: relative;
+    width: 100%; //needs to be defined to keep relative measurements constant
+    height: 100%;
+    background: $body-color;
+    font-size: 16px;
+  }
+  main {
+    padding-top: $header-height;
+    height: calc(100% - #{$header-height});
+  }
+}
+
+button {
+  outline: none;
+  background-color: $basic-white;
+  background-image: none;
+  border: 0;
+  border-radius: $border-radius;
+  font-size: $font-size-14;
+  font-weight: $font-weight-bold;
+  height: 2.5rem;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+a {
+  color: $primary-color;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+  &.link {
+    color: $secondary-color;
+    &:hover,
+    &:focus {
+      color: $primary-color;
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+    color: $grey;
+    text-decoration: none;
+  }
+}
+
+b {
+  font-weight: $font-weight-bold;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+h1 {
+  font-size: $font-size-24;
+  font-weight: $font-weight-extra-bold;
+  color: $secondary-color;
+  line-height: 2rem;
+}
+
+h3 {
+  font-size: $font-size-14;
+  color: $secondary-color;
+}
+
+h4 {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-20;
+}
+
+h6 {
+  font-size: $font-size-16;
+}
+
+input,
+textarea {
+  background: transparent;
+  font-family: "Open Sans", sans-serif;
+}
+
+.no-display {
+  display: none;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.default-invalid-input-message {
+  font-size: $font-size-11;
+  color: $indicative-orange;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.relative-no-wrap {
+  white-space: normal;
+  position: relative;
+}
+
+.normal-white-space {
+  white-space: normal;
+}
+
+.default-valid-input-message {
+  font-size: $font-size-11;
+  color: $indicative-blue;
+  position: absolute;
+  white-space: normal;
+}
+
+.default-input {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 30vw;
+
+  input {
+    &.default-input-invalid {
+      border-bottom: 1px solid $indicative-orange;
+    }
+
+    -webkit-appearance: none;
+    width: 100%;
+    border: 0;
+    padding-top: 2.688rem;
+    padding-left: 0;
+    padding-right: 0;
+    height: 2rem; // change to rem to be relative to font size, not screen
+    font-size: $font-size-16;
+    background: none;
+    border-radius: 0;
+    transition: all 0.15s ease;
+    font-weight: $font-weight-light;
+    color: $secondary-color;
+    border-bottom: 1px solid $dark-grey;
+
+    &:not(:placeholder-shown) + span {
+      transform: translateY(-1rem) scale(0.75);
+      color: $dark-grey;
+      bottom: 1vh;
+
+      &::before {
+        content: "";
+      }
+    }
+
+    &:-webkit-autofill(:placeholder-shown) + span {
+      transform: translateY(-1rem) scale(0.75);
+      color: $dark-grey;
+      bottom: 1vh;
+
+      &::before {
+        content: "";
+      }
+    }
+
+    &:focus {
+      background: none;
+      outline: none;
+
+      + span {
+        transform: translateY(-1rem) scale(0.75);
+        color: $dark-grey;
+        bottom: 1vh;
+
+        &::before {
+          content: "";
+        }
+
+        + .default-border {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+
+  .default-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: $font-size-16;
+    color: $grey;
+    transform-origin: 0 0;
+    transition: all 0.2s ease;
+    font-weight: $font-weight-light;
+
+    &::before {
+      content: "Enter ";
+      display: table-column;
+    }
+  }
+
+  .default-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1rem;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: 0 0;
+    transition: all 0.15s ease;
+  }
+}
+
+.custom-placeholder-prefix {
+  &::before {
+    content: "" !important;
+  }
+}
+
+.default-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.default-input input:hover {
+  background: transparent;
+}
+
+.default-input input:not(:placeholder-shown) {
+  background: none;
+  outline: none;
+}
+
+.default-page-wrapper {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+}
+
+.default-container-styling {
+  background-color: $basic-white;
+  border-radius: 0.375rem;
+  box-shadow: $box-shadow;
+  margin: 1%;
+}
+
+@media screen {
+  .default-page-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding: 1rem 1.5rem 0;
+    flex-direction: column;
+    background-color: $body-color;
+    align-items: flex-start;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .default-container-parameter {
+    align-items: inherit;
+  }
+}
+
+.default-page-header {
+  display: flex;
+  margin: 1%;
+  justify-content: flex-start;
+}
+
+.default-user-greetings {
+  font-weight: $font-weight-extra-bold;
+  font-size: $font-size-20;
+  color: $secondary-color;
+  align-items: center;
+  display: flex;
+}
+
+.default-date {
+  font-size: $font-size-13;
+  color: $dark-grey;
+  line-height: 1.6rem;
+  margin-left: 0.68rem;
+}
+
+.default-dashboard-panel {
+  display: flex;
+  flex: 1;
+}
+
+.no-border-radius {
+  border-radius: 0 !important;
+}
+
+// lead management
+
+.lead-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.lead-wrapper-heading {
+  position: relative;
+  height: auto;
+  margin-bottom: 1rem;
+
+  .heading-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.lead-wrapper-body {
+  display: flex;
+  height: auto;
+}
+
+.lead-wrapper-feature {
+  margin: 0 0 4%;
+  box-shadow: $box-shadow;
+  background: $basic-white;
+  border-radius: 4px;
+}
+
+.Rectangle-Copy {
+  width: 36.875rem;
+  height: 7.25rem;
+  box-shadow: 0 0.125rem 0.3125rem 0 rgba(0, 0, 0, 0.1);
+  background-color: $basic-white;
+  margin: 12.5rem;
+}
+
+// leads
+
+.leads-table-container {
+  width: 100%;
+  height: auto;
+}
+
+.leads-table-container-heading {
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $grey;
+  padding: 1rem;
+}
+
+.leads-table-container-title {
+  font-size: $font-size-14;
+  font-weight: $font-weight-bold;
+  color: $secondary-color;
+}
+
+.leads-table-container-button {
+  background-color: $primary-color;
+  position: relative;
+  font-size: $font-size-11;
+  font-weight: $font-weight-bold;
+  color: $basic-white;
+  line-height: 30px;
+  margin: 0 0.5%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 2%;
+  cursor: pointer;
+
+  span {
+    font-weight: $font-weight-light;
+    font-size: $font-size-24;
+    padding-right: 5%;
+  }
+}
+
+// Modal
+
+.modal-title {
+  color: $secondary-color;
+  font-size: $font-size-20;
+  font-weight: $font-weight-bold;
+}
+
+.modal-sub-title {
+  font-size: $font-size-13;
+  color: $dark-grey;
+}
+
+.upload-btn-container {
+  padding-top: 0.5rem;
+  flex-direction: row-reverse;
+  white-space: nowrap;
+
+  .inputfile {
+    width: 6rem;
+    height: 2.3rem;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: $z-index-6;
+    cursor: pointer;
+
+    + label {
+      font-size: $font-size-12;
+      color: $primary-color;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: inline-block;
+      border: 1px solid $primary-color;
+      width: 6rem;
+
+      &.disabled,
+      &:disabled {
+        border: 1px solid $grey;
+        color: $grey;
+        pointer-events: none;
+        filter: grayscale(1);
+      }
+    }
+  }
+
+  .upload-btn {
+    display: flex;
+    justify-content: center;
+
+    .image {
+      height: 1.125rem;
+    }
+
+    .text {
+      padding-left: 0.2rem;
+    }
+  }
+}
+
+.files-container {
+  .file {
+    margin-top: 1rem;
+    border: 1px solid $grey;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+
+    .file-information,
+    .doc-file-information {
+      display: flex;
+
+      .upload-status-icon,
+      .doc-upload-status-icon {
+        height: 1.5rem;
+      }
+
+      .name,
+      .doc-name {
+        padding: 0 1rem;
+        font-size: $font-size-11;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .upload-error-msg,
+      .doc-upload-error-msg {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: $font-size-11;
+        margin-left: auto;
+        margin-right: 1rem;
+        color: $theme-red;
+      }
+
+      .ocr-status {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: $font-size-11;
+        margin-right: 1rem;
+        color: $theme-red;
+
+        .pending-validation {
+          color: $grey;
+        }
+
+        .failed {
+          color: $theme-red;
+        }
+
+        .rejected {
+          color: $theme-red;
+        }
+      }
+
+      .delete-btn,
+      .doc-delete-btn {
+        height: 1.5rem;
+        cursor: pointer;
+      }
+
+      .uploading {
+        opacity: 0.3;
+        pointer-events: none;
+      }
+    }
+    .ocr-description {
+      padding-top: 0.5rem;
+      padding-left: 2rem;
+      color: $theme-red;
+      font-size: $font-size-11;
+    }
+  }
+
+  .upload-error {
+    border: 1px solid $theme-red;
+  }
+}
+
+// rotation
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.flex-reverse {
+  flex-direction: row-reverse;
+}
+
+//dropdown
+
+.custom-dropdown {
+  display: block;
+  flex-direction: column;
+  justify-content: flex-start;
+  white-space: nowrap;
+  position: relative;
+  top: 0;
+}
+
+.default-input .custom-dropdown + span {
+  &::before {
+    content: "";
+  }
+}
+
+.default-input .custom-dropdown:not(:placeholder-shown) + span {
+  white-space: nowrap;
+  bottom: 0;
+  transform: scale(0.75);
+  color: $dark-grey;
+}
+
+.select-error {
+  .ng-select-container {
+    &::after {
+      border-color: $indicative-orange !important;
+    }
+  }
+}
+
+.custom-select {
+  padding-top: 1.7rem;
+}
+
+.ng-select {
+  padding-bottom: 0;
+
+  .ng-select-container {
+    min-width: 5rem;
+    .ng-value-container {
+      .ng-value {
+        font-size: $font-size-16;
+        color: $secondary-color;
+        font-weight: $font-weight-light;
+      }
+
+      .ng-placeholder {
+        color: $grey;
+      }
+    }
+
+    .ng-arrow-wrapper .ng-arrow {
+      content: "";
+      width: 1rem;
+      height: 1rem;
+      background: url("../assets/images/icons/down-arrow.svg") no-repeat right;
+      top: 0.125rem;
+      display: inline-block;
+      border: 0;
+    }
+
+    &::after {
+      border: 0;
+    }
+  }
+
+  .ng-placeholder {
+    font-size: $font-size-16;
+    color: $grey;
+    font-weight: $font-weight-light;
+    max-width: 90%; // Since applying style to a library component, % is essential here
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &::before {
+      content: "Select ";
+    }
+  }
+
+  .ng-has-value {
+    .ng-placeholder {
+      color: $dark-grey !important;
+      &::before {
+        content: "";
+      }
+    }
+  }
+
+  &.ng-select-focused {
+    .ng-select-container {
+      .ng-value-container .ng-placeholder {
+        color: $dark-grey;
+
+        &::before {
+          content: "";
+        }
+      }
+
+      &::after {
+        border-color: $dark-grey;
+        border-width: 0.0625rem;
+      }
+
+      .ng-arrow-wrapper .ng-arrow {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .ng-dropdown-panel {
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    box-shadow: $box-shadow-dropdown;
+    padding-right: 0.25rem;
+
+    .ng-dropdown-panel-items {
+      .ng-option {
+        background: $basic-white;
+        color: $secondary-color;
+        font-size: $font-size-14;
+        padding-right: 0;
+
+        .custom-dropdown-item-border {
+          border-bottom: $border-dropdown;
+        }
+
+        .ng-option-selected {
+          color: inherit;
+          background: inherit;
+        }
+      }
+
+      .scrollable-content {
+        padding-right: 0.25rem;
+      }
+
+      .ng-option-marked {
+        color: $basic-white !important;
+        background: $primary-color;
+      }
+
+      .ng-optgroup {
+        border-top: $border-dropdown;
+      }
+
+      .no-border {
+        border: 0;
+      }
+    }
+
+    .scroll-host {
+      &::-webkit-scrollbar {
+        width: 0.25rem;
+        height: 2.5rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $grey;
+        border-radius: 0.125rem;
+        padding-right: 0.25rem;
+      }
+    }
+  }
+}
+.guideline-point p {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+}

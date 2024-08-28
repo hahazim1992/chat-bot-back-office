@@ -1,0 +1,58 @@
+@import "themes.scss";
+
+.default-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 1rem;
+
+  .message-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    .with-max-width {
+      max-width: 30rem;
+    }
+
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .list-item-error-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        font-size: $font-size-16;
+
+        .list-color-cherry {
+          font-weight: $font-weight-bold;
+          color: $primary-color;
+        }
+
+        .list-text {
+          padding-left: 1rem;
+        }
+
+        .credit-check-link {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.modal-navigation-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+}
+
+.close-modal {
+  text-align: right;
+  cursor: pointer;
+}

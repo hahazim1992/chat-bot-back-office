@@ -1,0 +1,71 @@
+@import "src/styles/themes.scss";
+// This is following DLS
+
+.button,
+button {
+  border-radius: 0.25rem;
+  font-stretch: normal;
+  font-style: normal;
+  text-align: center;
+  box-shadow: none;
+  margin: 0 0.625rem;
+  padding: 0 0.625rem;
+  width: auto;
+  box-sizing: initial;
+  font-family: "Open Sans", sans-serif;
+
+  &-primary {
+    color: $basic-white;
+    background-color: $primary-color;
+
+    &.disabled,
+    &:disabled {
+      color: $grey;
+      background-color: $light-grey;
+      pointer-events: none;
+    }
+  }
+
+  &-secondary {
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    background-color: transparent;
+
+    &.disabled,
+    &:disabled {
+      border: 1px solid $grey;
+      color: $grey;
+      pointer-events: none;
+    }
+  }
+
+  &-big {
+    min-width: 12.5rem;
+    height: 2.75rem;
+    font-size: $font-size-14;
+    font-weight: $font-weight-bold;
+    line-height: 1.43;
+    letter-spacing: normal;
+  }
+
+  &-small {
+    min-width: 8.438rem;
+    height: 2rem;
+    font-size: $font-size-12;
+    font-weight: 600;
+    line-height: 1.67;
+    letter-spacing: 0.11px; // need to use px, value too small
+  }
+
+  &-footer {
+    width: 10rem;
+    height: 2rem;
+
+    &:hover {
+      color: $primary-color;
+      background-color: $basic-white;
+      border-color: $primary-color;
+      border: 1px solid $primary-color;
+    }
+  }
+}

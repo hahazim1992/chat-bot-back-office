@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Icon/24/Solid/Error Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11.9999999,3.99999995 C7.57812497,3.99999995 3.99999995,7.57812497 3.99999995,11.9999999 C3.99999995,16.421875 7.57812497,19.9999999 11.9999999,19.9999999 C16.421875,19.9999999 19.9999999,16.421875 19.9999999,11.9999999 C19.9999999,7.57812497 16.421875,3.99999995 11.9999999,3.99999995 Z M11,7.44220948 C11,6.86899427 11.45,6.4 12,6.4 C12.55,6.4 13,6.86899427 13,7.44220948 L13,13.3577905 C13,13.9310057 12.55,14.4 12,14.4 C11.45,14.4 11,13.9310057 11,13.3577905 L11,7.44220948 Z M12,17.43125 C11.396875,17.43125 10.90625,16.940625 10.90625,16.3375 C10.90625,15.734375 11.396875,15.24375 12,15.24375 C12.603125,15.24375 13.09375,15.734375 13.09375,16.3375 C13.09375,16.940625 12.603125,17.43125 12,17.43125 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/24/Solid/Error-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="ExclamationSolid" fill-rule="nonzero"></g>
+        <g id="Colour/Basic/2_Secondary" mask="url(#mask-2)" fill="#ff835a">
+            <rect id="Rectangle-Copy" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

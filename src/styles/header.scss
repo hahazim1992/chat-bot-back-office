@@ -1,0 +1,71 @@
+.navigation-component {
+  display: flex;
+  vertical-align: middle;
+  height: 2.375rem;
+
+  .navigation {
+    padding: 0;
+    color: $secondary-color;
+    font-size: $font-size-10;
+    text-decoration: none;
+
+    .navigation-item {
+      text-transform: uppercase;
+      color: $dark-grey;
+      display: inline;
+
+      .navigation-item-clickable,
+      .clickable-nav-item {
+        cursor: pointer;
+
+        &:hover {
+          font-weight: $font-weight-extra-bold;
+        }
+      }
+
+      .last-nav-item {
+        font-weight: $font-weight-semi-bold;
+      }
+
+      &::before {
+        content: "/";
+      }
+
+      &:first-child::before {
+        content: "";
+      }
+    }
+    & > a {
+      color: $secondary-color;
+      margin: 0;
+    }
+  }
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+
+  .top-row,
+  .bottom-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .left-section {
+    display: flex;
+    align-items: center;
+  }
+
+  h1 {
+    padding-left: 0.625rem;
+    margin: 0;
+  }
+
+  .back-icon {
+    width: 2rem;
+    cursor: pointer;
+  }
+}

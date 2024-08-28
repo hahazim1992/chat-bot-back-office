@@ -1,0 +1,136 @@
+@import "themes.scss";
+
+@media print {
+  html {
+    overflow: visible;
+    position: relative;
+    width: 100%; //needs to be defined to keep relative measurements constant
+    height: 100%;
+    background: $body-color;
+    font-size: 16px;
+  }
+
+  @page {
+    margin: 0;
+    size: $a4-width $a4-height;
+  }
+
+  body {
+    background: $body-color;
+    overflow: visible;
+    color: $dark-grey;
+    height: 260mm;
+    position: relative;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .route-wrapper {
+    height: 100%;
+    overflow-y: visible;
+  }
+  /* stylelint-disable */
+  .navigation-component,
+  .header-container,
+  .sub-header,
+  .step-wizard-footer,
+  step-header {
+    display: none;
+  }
+  /* stylelint-enable */
+
+  .default-page-container {
+    width: 100%;
+    margin: 0;
+  }
+
+  .right-section {
+    max-width: none;
+    width: 100%;
+  }
+
+  .hide-for-print {
+    display: none;
+  }
+  .show-for-print {
+    display: table;
+    table-layout: fixed;
+    width: 215mm;
+    box-sizing: border-box;
+    left: 50%;
+    height: 105%;
+    top: 0%;
+    transform: translate(-50%);
+    position: relative;
+    thead tr td.print-heading-space,
+    tfoot tr td.print-footer-space {
+      height: 26mm;
+    }
+    .print-wrapper {
+      display: table-row-group;
+      position: relative;
+
+      .accordion {
+        margin: 0 !important;
+        padding: 0 !important;
+        .heading {
+          background-color: rgb(216, 216, 216) !important;
+          height: 1rem !important;
+          margin: 0 !important;
+        }
+      }
+
+      .secondary-section,
+      .primary-section,
+      .general-docs-container,
+      .product-docs-container,
+      .addl-docs-container,
+      .relation-table-container,
+      .photo-container,
+      .kdm-container,
+      .sections,
+      .sections .ecdd-section,
+      .high-risk-sections {
+        padding: 1rem !important;
+      }
+      .review-consent-container .consent-section img {
+        max-width: 30% !important;
+      }
+
+      .review-container .secondary-section .connection-info-container .disclosure-review-text {
+        max-width: 90%;
+      }
+
+      .heading,
+      .consent-heading {
+        padding: 1rem !important;
+        .main-heading {
+          padding: 0 !important;
+        }
+      }
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  }
+}
+
+@media screen {
+  .show-for-print {
+    display: none;
+  }
+}
+
+.epic-labels {
+  font-size: $font-size-18;
+  font-weight: $font-weight-bold;
+  background-color: $basic-black;
+  color: $basic-white;
+  padding: 10px 6px;
+  display: block;
+  -webkit-print-color-adjust: exact;
+  width: 100%;
+  box-sizing: border-box;
+  @media screen {
+    display: none;
+  }
+}

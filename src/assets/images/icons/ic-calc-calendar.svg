@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23">
+    <defs>
+        <linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#FF9EE3"/>
+            <stop offset="100%" stop-color="#FBAEA0"/>
+        </linearGradient>
+        <linearGradient id="b" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#FF3196"/>
+            <stop offset="100%" stop-color="#ED4400"/>
+        </linearGradient>
+        <linearGradient id="c" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#F93763"/>
+            <stop offset="100%" stop-color="#F33E2E"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="url(#a)" d="M2.44.44h18.88a2 2 0 0 1 2 2v2.4H.44v-2.4a2 2 0 0 1 2-2z" transform="translate(.12 .57)"/>
+        <path fill="#FFF" d="M2.56 22.13h18.88a2 2 0 0 0 2-2v-.64H.56v.64a2 2 0 0 0 2 2z"/>
+        <path fill="url(#b)" fill-rule="nonzero" d="M2.2 0h19.36a2.2 2.2 0 0 1 2.2 2.2v17.6a2.2 2.2 0 0 1-2.2 2.2H2.2A2.2 2.2 0 0 1 0 19.8V2.2A2.2 2.2 0 0 1 2.2 0zm0 .88A1.32 1.32 0 0 0 .88 2.2v17.6c0 .729.591 1.32 1.32 1.32h19.36a1.32 1.32 0 0 0 1.32-1.32V2.2A1.32 1.32 0 0 0 21.56.88H2.2z" transform="translate(.12 .57)"/>
+        <path fill="#FC3578" fill-rule="nonzero" d="M.12 5.97h23.76v-1H.12z"/>
+        <path fill="url(#c)" fill-rule="nonzero" d="M4.84 14.96v1H3.08v-1h1.76zm9.68 0v1h-1.76v-1h1.76zm-3.52 0v1H6.6v-1H11zm9.68 0v1h-4.4v-1h4.4zM11 12.32v1H6.6v-1H11zm9.68 0v1h-4.4v-1h4.4zM4.84 9.68v1H3.08v-1h1.76zm9.68 0v1h-1.76v-1h1.76zm-3.52 0v1H6.6v-1H11zm9.68 0v1h-4.4v-1h4.4zM4.84 7.04v1H3.08v-1h1.76zm9.68 0v1h-1.76v-1h1.76zm-3.52 0v1H6.6v-1H11zm9.68 0v1h-4.4v-1h4.4z" transform="translate(.12 .57)"/>
+        <path fill="#EF4113" fill-rule="nonzero" d="M.12 20.05h23.76v-1H.12z"/>
+        <path d="M-4-4.43h32v32H-4z"/>
+    </g>
+</svg>

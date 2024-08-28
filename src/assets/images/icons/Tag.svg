@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/24/Tag</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M16.34375,5.24999996 L16.34375,17.75 L12.803125,14.7875 L12,14.11875 L11.196875,14.7875 L7.65312497,17.75 L7.65312497,5.24999996 L16.34375,5.24999996 L16.34375,5.24999996 Z M17.221875,3.99999995 L6.77812497,3.99999995 C6.57187497,3.99999995 6.40312497,4.16874995 6.40312497,4.37187495 L6.40312497,19.625 C6.40312497,19.771875 6.48749997,19.90625 6.61874997,19.965625 C6.66874997,19.9875 6.72187497,20.0000001 6.77499997,20.0000001 C6.85937497,20.0000001 6.94687497,19.971875 7.01562497,19.9125 L12,15.746875 L16.984375,19.915625 C17.05,19.96875 17.1375,20 17.221875,20 C17.275,20 17.33125,19.9875 17.378125,19.965625 C17.5125,19.9 17.59375,19.771875 17.59375,19.625 L17.59375,4.37187495 C17.59375,4.16874995 17.428125,3.99999995 17.221875,3.99999995 L17.221875,3.99999995 Z" id="path-1"></path>
+    </defs>
+    <g id="Notes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1_Notes_Default_New" transform="translate(-304.000000, -223.000000)">
+            <g id="Icon/24/Tag" transform="translate(304.000000, 223.000000)">
+                <g>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Tag" fill-rule="nonzero"></g>
+                    <g id="Colour/Basic/2_Secondary" mask="url(#mask-2)" fill="#403838" fill-rule="evenodd">
+                        <rect id="Rectangle-Copy" x="0" y="0" width="24" height="24"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
