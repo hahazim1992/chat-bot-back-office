@@ -9,6 +9,7 @@ import { AppLandingComponent } from './app-landing/app-landing.component';
 import { CopyRightComponent } from './copy-right/copy-right.component';
 import { HeaderComponent } from './header/header.component';
 import { ChatbitAddEditComponent } from './chatbit-add-edit/chatbit-add-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ChatbitAddEditComponent } from './chatbit-add-edit/chatbit-add-edit.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

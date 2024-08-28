@@ -1,1 +1,38 @@
-<p>chatbit-add-edit works!</p>
+<div class="header-container" *ngIf="heading">
+  <div class="left-section">
+    <img
+      id="nav-back-icon"
+      class="back-icon"
+      src="assets/images/icons/nav-icon-left.svg"
+      alt="back"
+      (click)="navigateBack()"
+    />
+    <h1>{{ heading }}</h1>
+    <ng-content></ng-content>
+  </div>
+</div>
+
+<div class="chatbot-form-container">
+    <h2>{{ isEditMode ? 'Edit Chatbot' : 'Add New Chatbot' }}</h2>
+  
+    <div class="form-group">
+      <label for="chatbotName">Chatbot Name</label>
+      <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isEditMode" />
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" [(ngModel)]="chatbotData.description"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="active">Active</label>
+      <input type="checkbox" id="active" [(ngModel)]="chatbotData.active" />
+    </div>
+  
+    <div class="form-buttons">
+      <button (click)="saveChatbot()">Save</button>
+      <button (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+  
