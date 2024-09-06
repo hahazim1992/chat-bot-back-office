@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatbotService {
-  private chatBotsUrl = 'http://127.0.0.1:50000/chatbots'; // Base URL for chatbots
+  private chatBotsUrl = 'http://127.0.0.1:8000/chatbots'; // Base URL for chatbots
 
   constructor(private http: HttpClient) {}
 
