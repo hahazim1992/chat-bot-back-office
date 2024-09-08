@@ -52,9 +52,47 @@ export class ChatbitAddEditComponent implements OnInit {
   loadChatbotData(chatbotName: string): void {
     this.chatbotService.getSingleChatbot(chatbotName).subscribe((singleChatbot: any) => {
       this.chatbotData = singleChatbot;
+  
+      // Sort files alphabetically and numerically
+      this.chatbotData.files.sort(this.sortFiles);
     });
   }
-
+  
+  // Custom sorting function for both alphabetical and numeric sorting
+  sortFiles(fileA: string, fileB: string): number {
+    const regExpAlphaNum = /(\d+|\D+)/g;
+  
+    // Use match and provide fallback for null
+    const fileAArray = fileA.match(regExpAlphaNum) || [];
+    const fileBArray = fileB.match(regExpAlphaNum) || [];
+  
+    // Compare parts
+    for (let i = 0; i < Math.max(fileAArray.length, fileBArray.length); i++) {
+      const partA = fileAArray[i] || "";
+      const partB = fileBArray[i] || "";
+  
+      const isNumericA = !isNaN(partA as any);
+      const isNumericB = !isNaN(partB as any);
+  
+      if (isNumericA && isNumericB) {
+        // Compare numeric parts as numbers
+        const numA = parseInt(partA, 10);
+        const numB = parseInt(partB, 10);
+  
+        if (numA !== numB) {
+          return numA - numB;
+        }
+      } else {
+        // Compare alphabetic parts as strings
+        if (partA !== partB) {
+          return partA.localeCompare(partB);
+        }
+      }
+    }
+  
+    return 0;
+  }
+  
   saveChatbot(): void {
     if (this.isEditMode) {
       this.chatbotService.updateChatbot(this.chatbotData).subscribe(() => {
