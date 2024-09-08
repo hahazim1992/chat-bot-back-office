@@ -13,26 +13,62 @@
 </div>
 
 <div class="chatbot-form-container">
-    <h2>{{ isEditMode ? 'Edit Chatbot' : 'Add New Chatbot' }}</h2>
-  
-    <div class="form-group">
-      <label for="chatbotName">Chatbot Name</label>
-      <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isEditMode" />
-    </div>
-  
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="description" [(ngModel)]="chatbotData.description"></textarea>
-    </div>
-  
-    <div class="form-group">
-      <label for="active">Active</label>
-      <input type="checkbox" id="active" [(ngModel)]="chatbotData.active" />
-    </div>
-  
-    <div class="form-buttons">
-      <button (click)="saveChatbot()">Save</button>
-      <button (click)="cancel()">Cancel</button>
+  <h2>{{ isEditMode ? 'Edit Chatbot' : 'Add New Chatbot' }}</h2>
+
+  <div class="form-group">
+    <label for="chatbotName">Chatbot Name</label>
+    <input
+      type="text"
+      id="chatbotName"
+      [(ngModel)]="chatbotData.name"
+      [disabled]="isEditMode"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" [(ngModel)]="chatbotData.description"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Status</label>
+    <div>
+      <label>
+        <input
+          type="radio"
+          name="status"
+          [(ngModel)]="chatbotData.status"
+          value="active"
+        />
+        Active
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="status"
+          [(ngModel)]="chatbotData.status"
+          value="inactive"
+        />
+        Inactive
+      </label>
     </div>
   </div>
-  
+
+  <!-- Display uploaded files -->
+  <div class="form-group" *ngIf="chatbotData.files && chatbotData.files.length">
+    <label>Files</label>
+    <div class="file-icons">
+      <ng-container *ngFor="let file of chatbotData.files">
+        <a href="#" (click)="downloadFile(file)" class="file-link">
+          <img src="assets/images/icons/file-icon.svg" alt="File" />
+          <span>{{ file }}</span>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="form-buttons">
+    <button (click)="saveChatbot()">Save</button>
+    <button (click)="cancel()">Cancel</button>
+  </div>
+</div>

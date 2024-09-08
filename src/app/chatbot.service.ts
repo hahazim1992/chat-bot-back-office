@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ChatbotService {
   private chatBotsUrl = 'http://127.0.0.1:8000/chatbots'; // Base URL for chatbots
+  private createChatBotUrl = 'http://127.0.0.1:8000/create-chatbot';
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +24,7 @@ export class ChatbotService {
 
   // Add a new chatbot
   addChatbot(chatbot: any): Observable<any> {
-    return this.http.post<any>(this.chatBotsUrl, chatbot);
+    return this.http.post<any>(this.createChatBotUrl, chatbot);
   }
 
   // Update an existing chatbot

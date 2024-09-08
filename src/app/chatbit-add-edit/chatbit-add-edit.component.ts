@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatbotService } from '../chatbot.service'; 
+import { ChatbotService } from '../chatbot.service';
 import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
 
 @Component({
@@ -14,13 +14,14 @@ export class ChatbitAddEditComponent implements OnInit {
   chatbotData: any = {
     name: '',
     description: '',
-    active: false
+    status: 'inactive', // Default to inactive
+    files: [] // File array
   };
   route: ActivatedRoute;
   router: Router;
 
-  navigationLinks = ["chatbots"];
-  heading = "Chatbot Settings";
+  navigationLinks = ['chatbots'];
+  heading = 'Chatbot Settings';
 
   goBackOneLevel = goBackOneLevel;
   onClickBack = onClickBack;
@@ -31,7 +32,7 @@ export class ChatbitAddEditComponent implements OnInit {
   ) {
     this.route = injector.get<ActivatedRoute>(ActivatedRoute);
     this.router = injector.get<Router>(Router);
-   }
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -49,9 +50,8 @@ export class ChatbitAddEditComponent implements OnInit {
   }
 
   loadChatbotData(chatbotName: string): void {
-    this.chatbotService.getSingleChatbot(chatbotName).subscribe((singleChatbot: any[]) => {
-      console.log(`singleChatbot`, singleChatbot);
-        this.chatbotData = singleChatbot;
+    this.chatbotService.getSingleChatbot(chatbotName).subscribe(singleChatbot => {
+      this.chatbotData = singleChatbot;
     });
   }
 
@@ -69,5 +69,10 @@ export class ChatbitAddEditComponent implements OnInit {
 
   cancel(): void {
     this.router.navigate(['/chatbots']);
+  }
+
+  downloadFile(fileName: string): void {
+    // Logic to download the file (can be a GET request for the file)
+    console.log(`Download file: ${fileName}`);
   }
 }
