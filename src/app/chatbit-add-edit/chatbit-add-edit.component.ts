@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatbotService } from '../chatbot.service';
+import { ChatbotService } from '../chatbot.service'; 
 import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
 
 @Component({
@@ -14,14 +14,14 @@ export class ChatbitAddEditComponent implements OnInit {
   chatbotData: any = {
     name: '',
     description: '',
-    status: 'inactive', // Default to inactive
-    files: [] // File array
+    status: 'inactive',
+    files: []
   };
   route: ActivatedRoute;
   router: Router;
 
-  navigationLinks = ['chatbots'];
-  heading = 'Chatbot Settings';
+  navigationLinks = ["chatbots"];
+  heading = "Chatbot Settings";
 
   goBackOneLevel = goBackOneLevel;
   onClickBack = onClickBack;
@@ -50,7 +50,7 @@ export class ChatbitAddEditComponent implements OnInit {
   }
 
   loadChatbotData(chatbotName: string): void {
-    this.chatbotService.getSingleChatbot(chatbotName).subscribe(singleChatbot => {
+    this.chatbotService.getSingleChatbot(chatbotName).subscribe((singleChatbot: any) => {
       this.chatbotData = singleChatbot;
     });
   }
@@ -71,8 +71,12 @@ export class ChatbitAddEditComponent implements OnInit {
     this.router.navigate(['/chatbots']);
   }
 
-  downloadFile(fileName: string): void {
-    // Logic to download the file (can be a GET request for the file)
-    console.log(`Download file: ${fileName}`);
+  // Delete file with filename
+  deleteFile(fileName: string): void {
+    const chatbotName = this.chatbotData.name;
+    this.chatbotService.deleteFile(chatbotName, fileName).subscribe(() => {
+      // Remove the file from the chatbotData once deleted
+      this.chatbotData.files = this.chatbotData.files.filter((file: string) => file !== fileName);
+    });
   }
 }

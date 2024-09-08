@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ChatbotService {
   private chatBotsUrl = 'http://127.0.0.1:8000/chatbots'; // Base URL for chatbots
-  private createChatBotUrl = 'http://127.0.0.1:8000/create-chatbot';
+  private deleteFileUrl = 'http://127.0.0.1:8000'; // Base URL for delete file
 
   constructor(private http: HttpClient) {}
 
@@ -24,12 +24,19 @@ export class ChatbotService {
 
   // Add a new chatbot
   addChatbot(chatbot: any): Observable<any> {
-    return this.http.post<any>(this.createChatBotUrl, chatbot);
+    return this.http.post<any>(this.chatBotsUrl, chatbot);
   }
 
   // Update an existing chatbot
   updateChatbot(chatbot: any): Observable<any> {
     const url = `${this.chatBotsUrl}/${chatbot.name}`;
     return this.http.put<any>(url, chatbot);
+  }
+
+  // Delete a file from chatbot
+  deleteFile(chatbotName: string, fileName: string): Observable<any> {
+    const url = `${this.deleteFileUrl}/${chatbotName}/delete-file`;
+    const body = { filename: fileName }; // Send filename in the body
+    return this.http.request<any>('delete', url, { body });
   }
 }

@@ -35,6 +35,29 @@
     input[type="checkbox"] {
       margin-left: 10px;
     }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        
+        .file-icon {
+          margin-right: 10px;
+          width: 20px;
+          height: 20px;
+        }
+
+        .delete-icon {
+          margin-left: 10px;
+          cursor: pointer;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
   }
 
   .form-buttons {
@@ -54,27 +77,4 @@
       background-color: #dc3545;
     }
   }
-
-  .file-icons {
-    display: flex;
-    flex-wrap: wrap;
-  
-    .file-link {
-      display: flex;
-      align-items: center;
-      margin-right: 10px;
-      text-decoration: none;
-      color: #333;
-  
-      img {
-        width: 20px;
-        margin-right: 5px;
-      }
-  
-      span {
-        font-size: 14px;
-      }
-    }
-  }
 }
-  

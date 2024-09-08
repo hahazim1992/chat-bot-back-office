@@ -17,12 +17,7 @@
 
   <div class="form-group">
     <label for="chatbotName">Chatbot Name</label>
-    <input
-      type="text"
-      id="chatbotName"
-      [(ngModel)]="chatbotData.name"
-      [disabled]="isEditMode"
-    />
+    <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isEditMode" />
   </div>
 
   <div class="form-group">
@@ -33,38 +28,28 @@
   <div class="form-group">
     <label>Status</label>
     <div>
-      <label>
-        <input
-          type="radio"
-          name="status"
-          [(ngModel)]="chatbotData.status"
-          value="active"
-        />
-        Active
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="status"
-          [(ngModel)]="chatbotData.status"
-          value="inactive"
-        />
-        Inactive
-      </label>
+      <input type="radio" id="statusActive" value="active" [(ngModel)]="chatbotData.status" />
+      <label for="statusActive">Active</label>
+      <input type="radio" id="statusInactive" value="inactive" [(ngModel)]="chatbotData.status" />
+      <label for="statusInactive">Inactive</label>
     </div>
   </div>
 
-  <!-- Display uploaded files -->
-  <div class="form-group" *ngIf="chatbotData.files && chatbotData.files.length">
-    <label>Files</label>
-    <div class="file-icons">
-      <ng-container *ngFor="let file of chatbotData.files">
-        <a href="#" (click)="downloadFile(file)" class="file-link">
-          <img src="assets/images/icons/file-icon.svg" alt="File" />
-          <span>{{ file }}</span>
-        </a>
-      </ng-container>
-    </div>
+  <!-- File Display Section -->
+  <div class="form-group" *ngIf="chatbotData.files && chatbotData.files.length > 0">
+    <label>Uploaded Files:</label>
+    <ul>
+      <li *ngFor="let file of chatbotData.files">
+        <img src="assets/images/icons/loan-application.svg" alt="file icon" class="file-icon" />
+        {{ file }}
+        <img
+          src="assets/images/icons/bin-icon-cherry.svg"
+          alt="delete file"
+          class="delete-icon"
+          (click)="deleteFile(file)"
+        />
+      </li>
+    </ul>
   </div>
 
   <div class="form-buttons">
