@@ -1,59 +1,71 @@
-<div class="header-container" *ngIf="heading">
-  <div class="left-section">
-    <img
-      id="nav-back-icon"
-      class="back-icon"
-      src="assets/images/icons/nav-icon-left.svg"
-      alt="back"
-      (click)="navigateBack()"
-    />
-    <h1>{{ heading }}</h1>
-    <ng-content></ng-content>
-  </div>
-</div>
-
-<div class="chatbot-form-container">
-  <h2>{{ isEditMode ? 'Edit Chatbot' : 'Add New Chatbot' }}</h2>
-
-  <div class="form-group">
-    <label for="chatbotName">Chatbot Name</label>
-    <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isEditMode" />
-  </div>
-
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea id="description" [(ngModel)]="chatbotData.description"></textarea>
-  </div>
-
-  <div class="form-group">
-    <label>Status</label>
-    <div>
-      <input type="radio" id="statusActive" value="active" [(ngModel)]="chatbotData.status" />
-      <label for="statusActive">Active</label>
-      <input type="radio" id="statusInactive" value="inactive" [(ngModel)]="chatbotData.status" />
-      <label for="statusInactive">Inactive</label>
+<div class="chatbot-settings-container">
+  <!-- Back Button and Heading -->
+  <div class="header-container">
+    <div class="left-section">
+      <img src="assets/images/icons/nav-icon-left.svg" alt="back" class="back-icon" (click)="navigateBack()" />
+      <h1>Chatbot Settings</h1>
     </div>
   </div>
 
-  <!-- File Display Section -->
-  <div class="form-group" *ngIf="chatbotData.files && chatbotData.files.length > 0">
-    <label>Uploaded Files:</label>
-    <ul>
-      <li *ngFor="let file of chatbotData.files">
-        <img src="assets/images/icons/loan-application.svg" alt="file icon" class="file-icon" />
-        {{ file }}
-        <img
-          src="assets/images/icons/bin-icon-cherry.svg"
-          alt="delete file"
-          class="delete-icon"
-          (click)="deleteFile(file)"
-        />
-      </li>
-    </ul>
-  </div>
+  <!-- Chatbot Form -->
+  <div class="form-section">
+    <h2>{{ isEditMode ? 'Edit Chatbot' : 'Add New Chatbot' }}</h2>
 
-  <div class="form-buttons">
-    <button (click)="saveChatbot()">Save</button>
-    <button (click)="cancel()">Cancel</button>
+    <!-- Chatbot Name -->
+    <div class="form-group">
+      <label for="chatbotName">Chatbot Name <span class="required">*</span></label>
+      <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isEditMode" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" [(ngModel)]="chatbotData.description"></textarea>
+    </div>
+
+    <!-- Answer Queries Section -->
+    <div class="form-group">
+      <label for="answerQueries">How should the chatbot answer the queries?</label>
+      <textarea id="answerQueries" placeholder="Type here..." [(ngModel)]="chatbotData.answerMethod"></textarea>
+    </div>
+
+    <!-- Answer Queries Section -->
+    <div class="form-group">
+      <label for="statusActive">Status</label>
+      <textarea id="statusActive" placeholder="Type here..." [(ngModel)]="chatbotData.status"></textarea>
+    </div>
+
+    <!-- File Upload Section -->
+    <div class="file-upload-section">
+      <h3>Knowledge Base</h3>
+
+      <!-- File Upload Button -->
+      <div class="upload-area">
+        <div class="upload-button">
+          <img src="assets/images/icons/upload-icon.svg" alt="Upload" />
+          <span>Select File</span>
+          <p>(PDF only and less than 10MB)</p>
+        </div>
+      </div>
+
+      <!-- Uploaded Files List -->
+      <div class="file-list" *ngIf="chatbotData.files && chatbotData.files.length > 0">
+        <div class="file-item" *ngFor="let file of chatbotData.files">
+          <div class="file-name">
+            <img src="assets/images/icons/check-solid.svg" alt="Uploaded" />
+            <span>{{ file }}</span>
+          </div>
+          <div class="file-actions">
+            <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(file)" />
+            <img src="assets/images/icons/view-icon.svg" alt="View" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Buttons -->
+    <div class="form-buttons">
+      <button class="save-button" (click)="saveChatbot()">Save</button>
+    </div>
   </div>
 </div>
