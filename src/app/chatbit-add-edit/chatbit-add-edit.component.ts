@@ -2,6 +2,8 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatbotService } from '../chatbot.service'; 
 import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
+import { MatDialog } from '@angular/material/dialog'; // If using Angular Material dialog
+import { FileViewerComponent } from '../file-viewer/file-viewer.component';
 
 @Component({
   selector: 'app-chatbot-add-edit',
@@ -28,7 +30,8 @@ export class ChatbitAddEditComponent implements OnInit {
 
   constructor(
     private chatbotService: ChatbotService,
-    private injector: Injector
+    private injector: Injector,
+    private dialog: MatDialog // Inject Angular Material Dialog
   ) {
     this.route = injector.get<ActivatedRoute>(ActivatedRoute);
     this.router = injector.get<Router>(Router);
@@ -41,6 +44,19 @@ export class ChatbitAddEditComponent implements OnInit {
 
       if (this.isEditMode) {
         this.loadChatbotData(this.chatbotName);
+      }
+    });
+  }
+
+  // Open the file viewer in a dialog
+  viewFile(fileName: string): void {
+    console.log(`this.chatbotData.name`, this.chatbotData.name);
+    console.log(`fileName`, fileName);
+    this.dialog.open(FileViewerComponent, {
+      width: '600px',
+      data: {
+        chatbotName: this.chatbotData.name,
+        fileName: fileName
       }
     });
   }
