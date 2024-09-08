@@ -1,5 +1,24 @@
 <div class="file-viewer-container">
     <h2>{{ fileName }} Content</h2>
-    <pre>{{ fileContent }}</pre>
+  
+    <!-- Display Text File -->
+    <div *ngIf="fileType === 'text'">
+      <pre>{{ fileContent }}</pre>
+    </div>
+  
+    <!-- Display PDF File -->
+    <div *ngIf="fileType === 'pdf'">
+      <embed [src]="fileContent" type="application/pdf" width="100%" height="600px" />
+    </div>
+  
+    <!-- Display Image File -->
+    <div *ngIf="fileType === 'image'">
+      <img [src]="fileContent" alt="{{ fileName }}" style="max-width: 100%;" />
+    </div>
+  
+    <!-- Handle unknown file type -->
+    <div *ngIf="fileType === 'unknown'">
+      <p>Cannot display this file type.</p>
+    </div>
   </div>
   
