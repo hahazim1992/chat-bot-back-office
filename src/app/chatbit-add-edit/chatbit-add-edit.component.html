@@ -38,19 +38,6 @@
     <!-- File Upload Section -->
     <div class="file-upload-section">
       <h3>Knowledge Base</h3>
-
-      <!-- File Upload Button -->
-      <div class="upload-area">
-        <div class="upload-button">
-          <!-- Hidden file input -->
-          <input type="file" id="fileInput" style="display: none;" (change)="onFileSelected($event)" multiple accept=".txt, .md, .pdf" />
-          
-          <!-- Visible image acting as the trigger -->
-          <img src="assets/images/icons/upload-icon.svg" alt="Upload" (click)="triggerFileUpload()" />
-          <span>Select File</span>
-          <p>(.txt, .md, .pdf only and less than 10MB)</p>
-        </div>
-      </div>
       <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
       
 
@@ -66,6 +53,19 @@
             <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(fileName)" />
             <img src="assets/images/icons/icon-view.svg" alt="View" (click)="viewFile(fileName)" />
           </div>
+        </div>
+      </div>
+
+      <!-- File Upload Button -->
+      <div class="upload-area">
+        <div class="upload-button">
+          <!-- Hidden file input -->
+          <input type="file" id="fileInput" style="display: none;" (change)="onFileSelected($event)" multiple accept=".txt, .md, .pdf" />
+          
+          <!-- Visible image acting as the trigger -->
+          <img src="assets/images/icons/upload-icon.svg" alt="Upload" (click)="triggerFileUpload()" />
+          <span>Select File</span>
+          <p>(.txt, .md, .pdf only and less than 10MB)</p>
         </div>
       </div>
     </div>
