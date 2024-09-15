@@ -15,7 +15,9 @@ export class ChatbitAddEditComponent implements OnInit {
   isEditMode: boolean = false;
   chatbotData: any = {
     name: '',
+    title: '',
     description: '',
+    instruction: '',
     status: 'inactive',
     files: []
   };
@@ -108,14 +110,23 @@ export class ChatbitAddEditComponent implements OnInit {
   
     return 0;
   }
-  
+
   saveChatbot(): void {
     if (this.isEditMode) {
       this.chatbotService.updateChatbot(this.chatbotData).subscribe(() => {
         this.router.navigate(['/chatbots']);
       });
     } else {
-      this.chatbotService.addChatbot(this.chatbotData).subscribe(() => {
+      // Adjust the form field mappings for POST
+      const postData = {
+        name: this.chatbotData.name, // chatbot_title in POST
+        instruction: this.chatbotData.instruction, // answerMethod in POST
+        status: this.chatbotData.status,
+        description: this.chatbotData.description,
+        files: this.chatbotData.files
+      };
+
+      this.chatbotService.addChatbot(postData).subscribe(() => {
         this.router.navigate(['/chatbots']);
       });
     }

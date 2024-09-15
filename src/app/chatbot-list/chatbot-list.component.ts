@@ -33,12 +33,6 @@ export class ChatbotListComponent implements OnInit {
     });
   }
 
-  addNewChatbot(): void {
-    this.chatbotService.addChatbot({ name: 'New Chatbot', active: false }).subscribe(() => {
-      this.getChatbots(); // Refresh the list after adding
-    });
-  }
-
   onChatbotClick(chatbot: any): void {
     // Navigate to the chatbot detail page
     // You can use Angular's Router to navigate

@@ -1,3 +1,5 @@
+// ChatbotService
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,7 +10,8 @@ import { Observable } from 'rxjs';
 export class ChatbotService {
   private chatBotsUrl = 'http://127.0.0.1:8000/chatbots'; // Base URL for chatbots
   private deleteFileUrl = 'http://127.0.0.1:8000'; // Base URL for delete file
-
+  private createChatbotUrl = 'http://127.0.0.1:8000/create-chatbot'; // URL for POST
+  
   constructor(private http: HttpClient) {}
 
   // Get all chatbots
@@ -22,9 +25,20 @@ export class ChatbotService {
     return this.http.get<any>(url);
   }
 
-  // Add a new chatbot
+  // Add a new chatbot (POST)
   addChatbot(chatbot: any): Observable<any> {
-    return this.http.post<any>(this.chatBotsUrl, chatbot);
+    const formData = new FormData();
+    formData.append('chatbot_title', chatbot.name);
+    formData.append('answerMethod', chatbot.instruction);
+    formData.append('status', chatbot.status);
+    formData.append('description', chatbot.description);
+
+    // Append each file in the array
+    chatbot.files.forEach((file: File) => {
+      formData.append('files', file);
+    });
+
+    return this.http.post<any>(this.createChatbotUrl, formData);
   }
 
   // Update an existing chatbot
