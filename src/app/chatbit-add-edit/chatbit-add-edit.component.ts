@@ -85,24 +85,37 @@ export class ChatbitAddEditComponent implements OnInit {
 
   // View file based on add or edit mode
   viewFile(fileName: string): void {
-    if (this.isEditMode) {
-      // In edit mode, handle viewing files from the server (already uploaded)
+    if (this.isEditMode && !this.newFiles.some(file => file.name === fileName)) {
+      // For files already uploaded (from the API), handle as before
       this.dialog.open(FileViewerComponent, {
         width: '600px',
         data: { chatbotName: this.chatbotData.name, fileName }
       });
     } else {
-      // In add mode, view the file without base64 encoding
+      // For newly selected files (not yet uploaded), handle locally
       const newFile = this.newFiles.find(file => file.name === fileName);
       if (newFile) {
-        const fileURL = URL.createObjectURL(newFile); // Create a URL for the file
-        const fileType = this.getFileType(fileName);
-
-        // Open the file in the viewer component
-        this.dialog.open(FileViewerComponent, {
-          width: '600px',
-          data: { fileName, fileContent: fileURL, fileType }
-        });
+        const fileType = this.getFileType(newFile.name);
+  
+        if (fileType === 'text' || fileType === 'markdown') {
+          // Use FileReader to read text or markdown file
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+            const fileContent = e.target.result;
+            this.dialog.open(FileViewerComponent, {
+              width: '600px',
+              data: { fileName: newFile.name, fileContent, fileType }
+            });
+          };
+          reader.readAsText(newFile);
+        } else {
+          // For PDF and images, use createObjectURL to display
+          const fileContent = URL.createObjectURL(newFile);
+          this.dialog.open(FileViewerComponent, {
+            width: '600px',
+            data: { fileName: newFile.name, fileContent, fileType }
+          });
+        }
       }
     }
   }
@@ -114,9 +127,14 @@ export class ChatbitAddEditComponent implements OnInit {
       case 'txt': return 'text';
       case 'md': return 'markdown';
       case 'pdf': return 'pdf';
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'gif': return 'image';
       default: return 'unknown';
     }
   }
+
   navigateBack() {
     this.router.navigate(['chatbots']);
   }

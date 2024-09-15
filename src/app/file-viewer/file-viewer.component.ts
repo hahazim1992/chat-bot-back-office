@@ -95,4 +95,11 @@ export class FileViewerComponent implements OnInit {
     const apiUrl = `http://127.0.0.1:8000/${this.chatbotName}/file/${this.fileName}`;
     this.fileContent = apiUrl; // Use the URL directly to load the image in the view
   }
+
+  ngOnDestroy(): void {
+    // Revoke the object URL if it was created for newly selected files
+    if (typeof this.fileContent === 'string' && this.fileType !== 'server') {
+      URL.revokeObjectURL(this.fileContent);
+    }
+  }
 }
