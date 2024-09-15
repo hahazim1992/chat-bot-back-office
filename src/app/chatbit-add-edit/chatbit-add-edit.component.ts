@@ -224,14 +224,30 @@ export class ChatbitAddEditComponent implements OnInit {
         this.chatbotService.deleteFile(chatbotName, fileName).subscribe(() => {
           // Remove the file from the chatbotData.files array
           this.chatbotData.files.splice(existingFileIndex, 1);
+          // Reset the newFiles array as the file was deleted
+          this.newFiles = this.newFiles.filter(file => file.name !== fileName);
+          // Reset the file input field
+          this.resetFileInput();
         });
       } else {
         // If the file is not from the server, remove it from the newly selected files (newFiles)
         this.newFiles = this.newFiles.filter(file => file.name !== fileName);
+        // Reset the file input field
+        this.resetFileInput();
       }
     } else {
       // In add mode, just remove the file from the newFiles array
       this.newFiles = this.newFiles.filter(file => file.name !== fileName);
+      // Reset the file input field
+      this.resetFileInput();
+    }
+  }
+
+  // Reset the file input
+  resetFileInput(): void {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = ''; // Clear the input value
     }
   }
   
