@@ -265,4 +265,7 @@ export class ChatbitAddEditComponent implements OnInit {
     return this.chatbotData.name.trim() !== ''; // Check if chatbot name is not empty
   }
   
+  isNewFile(fileName: string): boolean {
+    return this.newFiles.some(file => file.name === fileName);
+  }
 }

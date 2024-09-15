@@ -58,7 +58,8 @@
         <div class="file-item" *ngFor="let fileName of getFileList()">
           <div class="file-name">
             <img src="assets/images/icons/check-solid.svg" alt="Uploaded" />
-            <span>{{ fileName }}</span>
+            <span [ngClass]="{'new-file': isNewFile(fileName)}">{{ fileName }}</span>
+            <span *ngIf="isNewFile(fileName)" class="new-indicator">New</span>
           </div>
           <div class="file-actions">
             <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(fileName)" />

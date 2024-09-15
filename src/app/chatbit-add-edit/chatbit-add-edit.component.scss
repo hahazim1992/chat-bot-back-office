@@ -102,6 +102,16 @@
         padding: 10px 0;
         border-bottom: 1px solid #e0e0e0;
 
+        .new-file {
+          font-weight: bold; /* Bold text for new files */
+        }
+
+        .new-indicator {
+          margin-left: 8px;
+          font-size: 0.9em;
+          color: #ff9800; /* Orange color for new indicator */
+        }
+
         .file-name {
           display: flex;
           align-items: center;
