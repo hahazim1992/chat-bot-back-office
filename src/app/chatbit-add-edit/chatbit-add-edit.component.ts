@@ -50,10 +50,22 @@ export class ChatbitAddEditComponent implements OnInit {
     });
   }
 
+  // Handle file selection
+  onFileSelected(event: any): void {
+    const selectedFiles: FileList = event.target.files;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      if (['txt', 'md', 'pdf'].includes(fileExtension || '') && file.size <= 10 * 1024 * 1024) {
+        this.chatbotData.files.push(file);
+      } else {
+        alert('Invalid file format or file is too large. Please upload .txt, .md, or .pdf files under 10MB.');
+      }
+    }
+  }
+
   // Open the file viewer in a dialog
   viewFile(fileName: string): void {
-    console.log(`this.chatbotData.name`, this.chatbotData.name);
-    console.log(`fileName`, fileName);
     this.dialog.open(FileViewerComponent, {
       width: '600px',
       data: {

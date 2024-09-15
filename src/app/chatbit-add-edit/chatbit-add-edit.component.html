@@ -42,9 +42,10 @@
       <!-- File Upload Button -->
       <div class="upload-area">
         <div class="upload-button">
+          <input type="file" (change)="onFileSelected($event)" multiple accept=".txt, .md, .pdf" />
           <img src="assets/images/icons/upload-icon.svg" alt="Upload" />
           <span>Select File</span>
-          <p>(PDF only and less than 10MB)</p>
+          <p>(.txt, .md, .pdf only and less than 10MB)</p>
         </div>
       </div>
 
