@@ -29,10 +29,16 @@
       <textarea id="answerQueries" placeholder="Type here..." [(ngModel)]="chatbotData.instruction" [disabled]="isLoading"></textarea>
     </div>
 
-    <!-- Answer Queries Section -->
+    <!-- Status Selection -->
     <div class="form-group">
-      <label for="statusActive">Status</label>
-      <textarea id="statusActive" placeholder="Type here..." [(ngModel)]="chatbotData.status" [disabled]="isLoading"></textarea>
+      <label for="status">Status</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="chatbotData.status" [disabled]="isLoading">
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="inactive">Inactive</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <!-- File Upload Section -->

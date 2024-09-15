@@ -14,6 +14,7 @@ import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
