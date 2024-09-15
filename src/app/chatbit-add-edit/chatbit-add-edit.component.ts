@@ -4,6 +4,7 @@ import { ChatbotService } from '../chatbot.service';
 import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
 import { MatDialog } from '@angular/material/dialog'; // If using Angular Material dialog
 import { FileViewerComponent } from '../file-viewer/file-viewer.component';
+import { marked } from 'marked';
 
 @Component({
   selector: 'app-chatbot-add-edit',
@@ -86,13 +87,13 @@ export class ChatbitAddEditComponent implements OnInit {
   // View file based on add or edit mode
   viewFile(fileName: string): void {
     if (this.isEditMode && !this.newFiles.some(file => file.name === fileName)) {
-      // For files already uploaded (from the API), handle as before
+      // Handle files from the server (already uploaded)
       this.dialog.open(FileViewerComponent, {
         width: '600px',
         data: { chatbotName: this.chatbotData.name, fileName }
       });
     } else {
-      // For newly selected files (not yet uploaded), handle locally
+      // Handle newly selected files (not yet uploaded)
       const newFile = this.newFiles.find(file => file.name === fileName);
       if (newFile) {
         const fileType = this.getFileType(newFile.name);
@@ -101,7 +102,11 @@ export class ChatbitAddEditComponent implements OnInit {
           // Use FileReader to read text or markdown file
           const reader = new FileReader();
           reader.onload = (e: any) => {
-            const fileContent = e.target.result;
+            let fileContent = e.target.result;
+            if (fileType === 'markdown') {
+              // Convert markdown to HTML
+              fileContent = marked(fileContent);
+            }
             this.dialog.open(FileViewerComponent, {
               width: '600px',
               data: { fileName: newFile.name, fileContent, fileType }
@@ -109,7 +114,7 @@ export class ChatbitAddEditComponent implements OnInit {
           };
           reader.readAsText(newFile);
         } else {
-          // For PDF and images, use createObjectURL to display
+          // For PDFs and images, use createObjectURL to display
           const fileContent = URL.createObjectURL(newFile);
           this.dialog.open(FileViewerComponent, {
             width: '600px',
@@ -119,6 +124,7 @@ export class ChatbitAddEditComponent implements OnInit {
       }
     }
   }
+  
 
   // Helper function to get file type from extension
   getFileType(fileName: string): string {

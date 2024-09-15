@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; // For sanitizing HTML content
-import { marked } from 'marked'; // Use marked.js for markdown rendering
-import { ChatbotService } from '../chatbot.service';// Import ChatbotService
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { marked } from 'marked'; // Import marked.js for markdown rendering
+import { ChatbotService } from '../chatbot.service';
 
 @Component({
   selector: 'app-file-viewer',
@@ -12,23 +12,29 @@ import { ChatbotService } from '../chatbot.service';// Import ChatbotService
 export class FileViewerComponent implements OnInit {
   chatbotName: string;
   fileName: string;
-  fileContent: string | SafeHtml = '';  // Can hold either plain text or sanitized HTML
+  fileContent: string | SafeHtml = '';
   fileType: string = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private sanitizer: DomSanitizer, // Inject the DomSanitizer for sanitizing HTML
-    private chatbotService: ChatbotService // Inject the ChatbotService
+    private sanitizer: DomSanitizer,
+    private chatbotService: ChatbotService
   ) {
     this.chatbotName = data.chatbotName;
     this.fileName = data.fileName;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.data.fileContent) {
       // If file content is passed directly (newly selected file), use it
-      this.fileContent = this.data.fileContent;
       this.fileType = this.data.fileType;
+      if (this.fileType === 'markdown') {
+        // Await the result of marked if it's asynchronous
+        const markdownHtml = await this.renderMarkdown(this.data.fileContent);
+        this.fileContent = this.sanitizer.bypassSecurityTrustHtml(markdownHtml);
+      } else {
+        this.fileContent = this.data.fileContent;
+      }
     } else {
       // Otherwise, load the file from the server (edit mode)
       this.fileType = this.getFileType(this.fileName);
@@ -43,15 +49,14 @@ export class FileViewerComponent implements OnInit {
       }
     }
   }
-  
 
-  // Detect the file type based on file extension
+  // Function to detect the file type based on the file extension
   getFileType(fileName: string): string {
     const extension = fileName.split('.').pop()?.toLowerCase() || '';
     if (['txt'].includes(extension)) {
       return 'text';
     } else if (['md'].includes(extension)) {
-      return 'markdown';  // Detect markdown files
+      return 'markdown';
     } else if (['pdf'].includes(extension)) {
       return 'pdf';
     } else if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
@@ -60,19 +65,20 @@ export class FileViewerComponent implements OnInit {
     return 'unknown';
   }
 
-  async loadMarkdownFile(): Promise<void> {
-    this.chatbotService.getFileContent(this.chatbotName, this.fileName).subscribe(
-      async (data: string) => {
-        const markdownContent: string = await marked(data); // Convert markdown to HTML asynchronously
-        this.fileContent = this.sanitizer.bypassSecurityTrustHtml(markdownContent); // Sanitize and assign HTML
-      },
-      error => {
-        console.error('Error loading markdown content:', error);
-      }
-    );
-  }
+    // Load a markdown file from the server
+    loadMarkdownFile(): void {
+      this.chatbotService.getFileContent(this.chatbotName, this.fileName).subscribe(
+        async (data: string) => {
+          const markdownHtml = await this.renderMarkdown(data);
+          this.fileContent = this.sanitizer.bypassSecurityTrustHtml(markdownHtml); // Sanitize and assign HTML
+        },
+        error => {
+          console.error('Error loading markdown content:', error);
+        }
+      );
+    }
 
-  // Load a text file
+  // Load a text file from the server
   loadTextFile(): void {
     this.chatbotService.getFileContent(this.chatbotName, this.fileName).subscribe(
       (data: string) => {
@@ -84,22 +90,24 @@ export class FileViewerComponent implements OnInit {
     );
   }
 
-  // Load a PDF file (display it in an iframe or embed)
+  // Load a PDF file from the server (display in iframe/embed)
   loadPdfFile(): void {
     const apiUrl = `http://127.0.0.1:8000/${this.chatbotName}/file/${this.fileName}`;
-    this.fileContent = apiUrl; // Use the URL directly to load the PDF in the view
+    this.fileContent = apiUrl; // Use the URL to load the PDF
   }
 
-  // Load an image file
+  // Load an image file from the server
   loadImageFile(): void {
     const apiUrl = `http://127.0.0.1:8000/${this.chatbotName}/file/${this.fileName}`;
-    this.fileContent = apiUrl; // Use the URL directly to load the image in the view
+    this.fileContent = apiUrl; // Use the URL to load the image
   }
 
-  ngOnDestroy(): void {
-    // Revoke the object URL if it was created for newly selected files
-    if (typeof this.fileContent === 'string' && this.fileType !== 'server') {
-      URL.revokeObjectURL(this.fileContent);
+  // Render markdown to HTML, handling both promise-based and synchronous returns
+  async renderMarkdown(markdown: string): Promise<string> {
+    const result = marked(markdown);
+    if (result instanceof Promise) {
+      return await result;
     }
+    return result;
   }
 }
