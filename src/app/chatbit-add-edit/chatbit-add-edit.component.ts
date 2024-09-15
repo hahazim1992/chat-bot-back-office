@@ -71,13 +71,17 @@ export class ChatbitAddEditComponent implements OnInit {
   // Get the file list based on mode
   getFileList(): string[] {
     if (this.isEditMode) {
-      // In edit mode, show files from the server
-      return [...this.chatbotData.files];
+      // In edit mode, combine server files and newly selected files
+      return [
+        ...this.chatbotData.files,         // Existing files from the server
+        ...this.newFiles.map(file => file.name) // Newly selected files
+      ];
     } else {
-      // In add mode, show newly selected files
-      return [...this.newFiles.map(file => file.name)];
+      // In add mode, only show newly selected files
+      return this.newFiles.map(file => file.name);
     }
   }
+  
 
   // View file based on add or edit mode
   viewFile(fileName: string): void {
@@ -187,15 +191,26 @@ export class ChatbitAddEditComponent implements OnInit {
   // Delete file with filename
   deleteFile(fileName: string): void {
     if (this.isEditMode) {
-      const chatbotName = this.chatbotData.name;
-      this.chatbotService.deleteFile(chatbotName, fileName).subscribe(() => {
-        this.chatbotData.files = this.chatbotData.files.filter((file: string) => file !== fileName);
-      });
+      // Check if the file exists in the server files
+      const existingFileIndex = this.chatbotData.files.indexOf(fileName);
+      
+      if (existingFileIndex !== -1) {
+        // If the file exists on the server, call the API to delete it
+        const chatbotName = this.chatbotData.name;
+        this.chatbotService.deleteFile(chatbotName, fileName).subscribe(() => {
+          // Remove the file from the chatbotData.files array
+          this.chatbotData.files.splice(existingFileIndex, 1);
+        });
+      } else {
+        // If the file is not from the server, remove it from the newly selected files (newFiles)
+        this.newFiles = this.newFiles.filter(file => file.name !== fileName);
+      }
     } else {
-      // In add mode, remove file from the newFiles array
+      // In add mode, just remove the file from the newFiles array
       this.newFiles = this.newFiles.filter(file => file.name !== fileName);
     }
   }
+  
 
   triggerFileUpload(): void {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
