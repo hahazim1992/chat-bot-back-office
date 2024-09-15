@@ -21,6 +21,7 @@ export class ChatbitAddEditComponent implements OnInit {
     status: 'inactive',
     files: []
   };
+  saveLabel = "";
   route: ActivatedRoute;
   router: Router;
 
@@ -45,9 +46,11 @@ export class ChatbitAddEditComponent implements OnInit {
     const chatbotName = this.route.snapshot.paramMap.get('chatbot_name');
     if (chatbotName) {
       this.isEditMode = true;
+      this.saveLabel = "Edit";
       this.loadChatbotData(chatbotName);
     } else {
       this.isEditMode = false;
+      this.saveLabel = "Save";
     }
   }
 
@@ -178,6 +181,13 @@ export class ChatbitAddEditComponent implements OnInit {
       this.chatbotService.deleteFile(chatbotName, fileName).subscribe(() => {
         this.chatbotData.files = this.chatbotData.files.filter((file: string) => file !== fileName);
       });
+    }
+  }
+
+  triggerFileUpload(): void {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
     }
   }
 }

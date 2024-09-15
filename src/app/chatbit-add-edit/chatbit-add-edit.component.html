@@ -42,14 +42,17 @@
       <!-- File Upload Button -->
       <div class="upload-area">
         <div class="upload-button">
-          <input type="file" (change)="onFileSelected($event)" multiple accept=".txt, .md, .pdf" />
-          <img src="assets/images/icons/upload-icon.svg" alt="Upload" />
+          <!-- Hidden file input -->
+          <input type="file" id="fileInput" style="display: none;" (change)="onFileSelected($event)" multiple accept=".txt, .md, .pdf" />
+          
+          <!-- Visible image acting as the trigger -->
+          <img src="assets/images/icons/upload-icon.svg" alt="Upload" (click)="triggerFileUpload()" />
           <span>Select File</span>
           <p>(.txt, .md, .pdf only and less than 10MB)</p>
         </div>
       </div>
+      
 
-      <!-- Uploaded Files List -->
       <!-- Uploaded Files List -->
       <div class="file-list" *ngIf="getFileList().length > 0">
         <div class="file-item" *ngFor="let fileName of getFileList()">
@@ -67,7 +70,7 @@
 
     <!-- Save Buttons -->
     <div class="form-buttons">
-      <button class="save-button" (click)="saveChatbot()">Save</button>
+      <button class="save-button" (click)="saveChatbot()">{{saveLabel}}</button>
     </div>
   </div>
 </div>
