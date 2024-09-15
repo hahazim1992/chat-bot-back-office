@@ -155,11 +155,21 @@ export class ChatbitAddEditComponent implements OnInit {
 
   // Save chatbot data (add or edit mode)
   saveChatbot(): void {
+    
     if (this.isEditMode) {
-      this.chatbotService.updateChatbot(this.chatbotData).subscribe(() => {
+      // Handle edit (PUT)
+      const postData = {
+        name: this.chatbotData.name,
+        instruction: this.chatbotData.instruction,
+        status: this.chatbotData.status,
+        description: this.chatbotData.description,
+        files: this.newFiles
+      };
+      this.chatbotService.updateChatbot(postData).subscribe(() => {
         this.router.navigate(['/chatbots']);
       });
     } else {
+      // Handle add (POST)
       const postData = {
         name: this.chatbotData.name,
         instruction: this.chatbotData.instruction,
@@ -181,6 +191,9 @@ export class ChatbitAddEditComponent implements OnInit {
       this.chatbotService.deleteFile(chatbotName, fileName).subscribe(() => {
         this.chatbotData.files = this.chatbotData.files.filter((file: string) => file !== fileName);
       });
+    } else {
+      // In add mode, remove file from the newFiles array
+      this.newFiles = this.newFiles.filter(file => file.name !== fileName);
     }
   }
 
