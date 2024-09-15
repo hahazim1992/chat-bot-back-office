@@ -32,4 +32,8 @@ export class ChatbotListComponent implements OnInit {
   navigateToEdit(chatbotName: string): void {
     this.router.navigate(['/chatbots/edit', chatbotName]);
   }
+
+  navigateToAdd(): void {
+    this.router.navigate(['/chatbots/add']);
+  }
 }

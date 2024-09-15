@@ -192,7 +192,7 @@ export class ChatbitAddEditComponent implements OnInit {
     this.spinner.show(); // Show the spinner
 
     // Check if in edit mode and if there are no new files
-    if (this.isEditMode && this.newFiles.length === 0) {
+    if (this.newFiles.length === 0) {
         this.spinner.hide(); // Hide the spinner
         this.isLoading = false; // Set loading to false
         alert('At least one new file needs to be uploaded for editing.'); // Show error message

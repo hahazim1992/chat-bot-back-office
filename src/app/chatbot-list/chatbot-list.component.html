@@ -1,6 +1,9 @@
 <div class="chatbot-list-header">
   <h1 class="chatbot-list-title">List of Chatbots</h1>
 </div>
+<div class="chatbot-list-button">
+  <button class="add-chatbot-btn" (click)="navigateToAdd()">+ Add New Chatbot</button>
+</div>
 
 <div class="chatbot-list-container">
   <div
@@ -24,10 +27,5 @@
         <li *ngFor="let file of chatbot.files">{{ file }}</li>
       </ul>
     </div>
-  </div>
-
-  <div class="add-chatbot-card" [routerLink]="['/chatbots/add']">
-    <div class="add-icon">+</div>
-    <div class="add-text">Add New Chatbot</div>
   </div>
 </div>
