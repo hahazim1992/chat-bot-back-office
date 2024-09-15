@@ -1,7 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { ChatbotService } from '../chatbot.service'; 
-import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-chatbot-list',
@@ -14,9 +13,6 @@ export class ChatbotListComponent implements OnInit {
   heading = "My Chatbots";
   route: ActivatedRoute;
   router: Router;
-
-  goBackOneLevel = goBackOneLevel;
-  onClickBack = onClickBack;
 
   constructor(private injector: Injector, private chatbotService: ChatbotService) {
     this.route = injector.get<ActivatedRoute>(ActivatedRoute);
@@ -33,9 +29,7 @@ export class ChatbotListComponent implements OnInit {
     });
   }
 
-  onChatbotClick(chatbot: any): void {
-    // Navigate to the chatbot detail page
-    // You can use Angular's Router to navigate
-    console.log('Redirecting to:', chatbot.name);
+  navigateToEdit(chatbotName: string): void {
+    this.router.navigate(['/chatbots/edit', chatbotName]);
   }
 }

@@ -1,9 +1,14 @@
+<div class="chatbot-list-header">
+  <h1 class="chatbot-list-title">List of Chatbots</h1>
+</div>
+
 <div class="chatbot-list-container">
-  <div class="chatbot-list-header">
-    <h1 class="chatbot-list-title">List of Chatbots</h1>
-  </div>
-  <div class="chatbot-card" *ngFor="let chatbot of chatbots">
-    <a [routerLink]="['/chatbots/edit', chatbot.name]" class="chatbot-name">{{ chatbot.title }}</a>
+  <div
+    class="chatbot-card"
+    *ngFor="let chatbot of chatbots"
+    (click)="navigateToEdit(chatbot.name)"
+  >
+    <div class="chatbot-name">{{ chatbot.title }}</div>
     <div class="chatbot-status" [ngClass]="chatbot.status === 'active' ? 'active' : 'inactive'">
       {{ chatbot.status === 'active' ? 'Active' : 'Inactive' }}
     </div>

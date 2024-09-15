@@ -32,11 +32,14 @@
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  transition: transform 0.2s;
+  transition: transform 0.2s, border 0.2s;
+  cursor: pointer; /* Change cursor to pointer */
+  border: 2px solid transparent; /* Default border */
 }
 
 .chatbot-card:hover, .add-chatbot-card:hover {
   transform: scale(1.02);
+  border: 2px solid #ff416c; /* Highlight border on hover */
 }
 
 .chatbot-name {
@@ -45,17 +48,42 @@
   margin-bottom: 10px;
 }
 
+@keyframes neonGreenBlink {
+  0%, 100% {
+    text-shadow: 0 0 8px #39ff14, 0 0 12px #39ff14, 0 0 24px #39ff14, 0 0 36px #39ff14;
+    color: #39ff14;
+  }
+  50% {
+    text-shadow: none;
+    color: #39ff14;
+  }
+}
+
+@keyframes neonRedBlink {
+  0%, 100% {
+    text-shadow: 0 0 8px #ff073a, 0 0 12px #ff073a, 0 0 24px #ff073a, 0 0 36px #ff073a;
+    color: #ff073a;
+  }
+  50% {
+    text-shadow: none;
+    color: #ff073a;
+  }
+}
+
 .chatbot-status {
   font-size: 16px;
   margin-bottom: 10px;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 .chatbot-status.active {
-  color: green;
+  animation-name: neonGreenBlink; /* Apply neon green blinking animation */
 }
 
 .chatbot-status.inactive {
-  color: gray;
+  animation-name: neonRedBlink; /* Apply neon red blinking animation */
 }
 
 .chatbot-description,
