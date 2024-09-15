@@ -14,25 +14,25 @@
     <!-- Chatbot Name -->
     <div class="form-group">
       <label for="chatbotName">Chatbot Name <span class="required">*</span></label>
-      <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isEditMode" />
+      <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isLoading || isEditMode" />
     </div>
 
     <!-- Description -->
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea id="description" [(ngModel)]="chatbotData.description"></textarea>
+      <textarea id="description" [(ngModel)]="chatbotData.description" [disabled]="isLoading"></textarea>
     </div>
 
     <!-- Answer Queries Section -->
     <div class="form-group">
       <label for="answerQueries">How should the chatbot answer the queries?</label>
-      <textarea id="answerQueries" placeholder="Type here..." [(ngModel)]="chatbotData.instruction"></textarea>
+      <textarea id="answerQueries" placeholder="Type here..." [(ngModel)]="chatbotData.instruction" [disabled]="isLoading"></textarea>
     </div>
 
     <!-- Answer Queries Section -->
     <div class="form-group">
       <label for="statusActive">Status</label>
-      <textarea id="statusActive" placeholder="Type here..." [(ngModel)]="chatbotData.status"></textarea>
+      <textarea id="statusActive" placeholder="Type here..." [(ngModel)]="chatbotData.status" [disabled]="isLoading"></textarea>
     </div>
 
     <!-- File Upload Section -->
@@ -68,9 +68,20 @@
       </div>
     </div>
 
+    <!-- Loader -->
+    <ngx-spinner 
+    bdColor="rgba(51, 51, 51, 0.8)" 
+    size="large" 
+    color="#fff" 
+    type="ball-scale-multiple" 
+    [fullScreen]="true"
+    *ngIf="isLoading">
+    </ngx-spinner>
+
     <!-- Save Buttons -->
     <div class="form-buttons">
-      <button class="save-button" (click)="saveChatbot()">{{saveLabel}}</button>
+      <button class="save-button" (click)="saveChatbot()" [disabled]="!isFormValid() || isLoading">{{saveLabel}}</button>
+      <div *ngIf="isLoading" class="loader">Loading...</div>
     </div>
   </div>
 </div>

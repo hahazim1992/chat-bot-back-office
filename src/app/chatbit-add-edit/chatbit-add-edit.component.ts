@@ -5,6 +5,7 @@ import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
 import { MatDialog } from '@angular/material/dialog'; // If using Angular Material dialog
 import { FileViewerComponent } from '../file-viewer/file-viewer.component';
 import { marked } from 'marked';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-chatbot-add-edit',
@@ -34,10 +35,13 @@ export class ChatbitAddEditComponent implements OnInit {
 
   newFiles: File[] = [];
 
+  isLoading: boolean = false;
+
   constructor(
     private chatbotService: ChatbotService,
     private injector: Injector,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService
   ) {
     this.route = injector.get<ActivatedRoute>(ActivatedRoute);
     this.router = injector.get<Router>(Router);
@@ -183,34 +187,32 @@ export class ChatbitAddEditComponent implements OnInit {
 
   // Save chatbot data (add or edit mode)
   saveChatbot(): void {
-    
-    if (this.isEditMode) {
-      // Handle edit (PUT)
-      const postData = {
-        name: this.chatbotData.name,
-        instruction: this.chatbotData.instruction,
-        status: this.chatbotData.status,
-        description: this.chatbotData.description,
-        files: this.newFiles
-      };
-      this.chatbotService.updateChatbot(postData).subscribe(() => {
-        this.router.navigate(['/chatbots']);
-      });
-    } else {
-      // Handle add (POST)
-      const postData = {
-        name: this.chatbotData.name,
-        instruction: this.chatbotData.instruction,
-        status: this.chatbotData.status,
-        description: this.chatbotData.description,
-        files: this.newFiles
-      };
+    this.isLoading = true; // Set loading to true
+    this.spinner.show(); // Show the spinner
 
-      this.chatbotService.addChatbot(postData).subscribe(() => {
-        this.router.navigate(['/chatbots']);
-      });
-    }
+    const postData = {
+      name: this.chatbotData.name,
+      instruction: this.chatbotData.instruction,
+      status: this.chatbotData.status,
+      description: this.chatbotData.description,
+      files: this.newFiles
+    };
+
+    const apiCall = this.isEditMode 
+      ? this.chatbotService.updateChatbot(postData) 
+      : this.chatbotService.addChatbot(postData);
+
+    apiCall.subscribe(() => {
+      this.spinner.hide(); // Hide the spinner after the API call is complete
+      this.isLoading = false; // Set loading to false
+      this.router.navigate(['/chatbots']);
+    }, error => {
+      this.spinner.hide(); // Hide the spinner if there is an error
+      this.isLoading = false; // Set loading to false
+      // Handle error
+    });
   }
+  
 
   // Delete file with filename
   deleteFile(fileName: string): void {
@@ -258,4 +260,9 @@ export class ChatbitAddEditComponent implements OnInit {
       fileInput.click();
     }
   }
+
+  isFormValid(): boolean {
+    return this.chatbotData.name.trim() !== ''; // Check if chatbot name is not empty
+  }
+  
 }
