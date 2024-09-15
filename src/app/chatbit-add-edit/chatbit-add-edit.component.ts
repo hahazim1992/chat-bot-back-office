@@ -29,6 +29,7 @@ export class ChatbitAddEditComponent implements OnInit {
 
   navigationLinks = ["chatbots"];
   heading = "Chatbot Settings";
+  errorMessage: string | null = null; // Initialize error message variable
 
   goBackOneLevel = goBackOneLevel;
   onClickBack = onClickBack;
@@ -190,28 +191,36 @@ export class ChatbitAddEditComponent implements OnInit {
     this.isLoading = true; // Set loading to true
     this.spinner.show(); // Show the spinner
 
+    // Check if in edit mode and if there are no new files
+    if (this.isEditMode && this.newFiles.length === 0) {
+        this.spinner.hide(); // Hide the spinner
+        this.isLoading = false; // Set loading to false
+        alert('At least one new file needs to be uploaded for editing.'); // Show error message
+        return; // Exit the function
+    }
+
     const postData = {
-      name: this.chatbotData.name,
-      instruction: this.chatbotData.instruction,
-      status: this.chatbotData.status,
-      description: this.chatbotData.description,
-      files: this.newFiles
+        name: this.chatbotData.name,
+        instruction: this.chatbotData.instruction,
+        status: this.chatbotData.status,
+        description: this.chatbotData.description,
+        files: this.newFiles
     };
 
     const apiCall = this.isEditMode 
-      ? this.chatbotService.updateChatbot(postData) 
-      : this.chatbotService.addChatbot(postData);
+        ? this.chatbotService.updateChatbot(postData) 
+        : this.chatbotService.addChatbot(postData);
 
     apiCall.subscribe(() => {
-      this.spinner.hide(); // Hide the spinner after the API call is complete
-      this.isLoading = false; // Set loading to false
-      this.router.navigate(['/chatbots']);
+        this.spinner.hide(); // Hide the spinner after the API call is complete
+        this.isLoading = false; // Set loading to false
+        this.router.navigate(['/chatbots']);
     }, error => {
-      this.spinner.hide(); // Hide the spinner if there is an error
-      this.isLoading = false; // Set loading to false
-      // Handle error
+        this.spinner.hide(); // Hide the spinner if there is an error
+        this.isLoading = false; // Set loading to false
+        // Handle error
     });
-  }
+}
   
 
   // Delete file with filename
