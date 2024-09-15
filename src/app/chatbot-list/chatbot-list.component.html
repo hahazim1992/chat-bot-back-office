@@ -1,34 +1,23 @@
-<div class="navigation-component">
-  <ul class="navigation" *ngIf="navigationLinks.length > 1">
-    <li *ngFor="let navigation of navigationLinks; last as isLast; let i = index" class="navigation-item">
-      <span class="navigation-item-clickable" (click)="onClickBack(i, router, route)" *ngIf="!isLast">
-        {{ navigation }}
-      </span>
-      <span class="last-nav-item" *ngIf="isLast">
-        {{ navigation }}
-      </span>
-    </li>
-  </ul>
-</div>
-<div class="header-container" *ngIf="heading">
-  <div class="left-section">
-    <img
-      id="nav-back-icon"
-      class="back-icon"
-      src="assets/images/icons/nav-icon-left.svg"
-      alt="back"
-      (click)="goBackOneLevel(router, route)"
-    />
-    <h1>{{ heading }}</h1>
-    <ng-content></ng-content>
-  </div>
-</div>
-
 <div class="chatbot-list-container">
+  <div class="chatbot-list-header">
+    <h1 class="chatbot-list-title">List of Chatbots</h1>
+  </div>
   <div class="chatbot-card" *ngFor="let chatbot of chatbots">
-    <a [routerLink]="['/chatbots/edit', chatbot.name]" class="chatbot-name">{{ chatbot.name }}</a>
-    <div class="chatbot-status" [ngClass]="chatbot.active ? 'active' : 'inactive'">
-      {{ chatbot.active ? 'Active' : 'Inactive' }}
+    <a [routerLink]="['/chatbots/edit', chatbot.name]" class="chatbot-name">{{ chatbot.title }}</a>
+    <div class="chatbot-status" [ngClass]="chatbot.status === 'active' ? 'active' : 'inactive'">
+      {{ chatbot.status === 'active' ? 'Active' : 'Inactive' }}
+    </div>
+    <div class="chatbot-description">
+      <strong>Description:</strong> {{ chatbot.description }}
+    </div>
+    <div class="chatbot-instruction">
+      <strong>Instruction:</strong> {{ chatbot.instruction }}
+    </div>
+    <div class="chatbot-files">
+      <strong>Files:</strong>
+      <ul>
+        <li *ngFor="let file of chatbot.files">{{ file }}</li>
+      </ul>
     </div>
   </div>
 
@@ -37,4 +26,3 @@
     <div class="add-text">Add New Chatbot</div>
   </div>
 </div>
-  

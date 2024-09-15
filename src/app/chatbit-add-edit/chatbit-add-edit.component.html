@@ -33,7 +33,6 @@
     <div class="form-group">
       <label for="status">Status</label>
       <mat-form-field appearance="fill">
-        <mat-label>Status</mat-label>
         <mat-select [(ngModel)]="chatbotData.status" [disabled]="isLoading">
           <mat-option value="active">Active</mat-option>
           <mat-option value="inactive">Inactive</mat-option>
@@ -56,8 +55,8 @@
             <span *ngIf="isNewFile(fileName)" class="new-indicator">New</span>
           </div>
           <div class="file-actions">
-            <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(fileName)" />
             <img src="assets/images/icons/icon-view.svg" alt="View" (click)="viewFile(fileName)" />
+            <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(fileName)" />
           </div>
         </div>
       </div>
