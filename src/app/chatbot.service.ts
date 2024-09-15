@@ -1,5 +1,3 @@
-// ChatbotService
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -52,5 +50,11 @@ export class ChatbotService {
     const url = `${this.deleteFileUrl}/${chatbotName}/delete-file`;
     const body = { filename: fileName }; // Send filename in the body
     return this.http.request<any>('delete', url, { body });
+  }
+
+  // Fetch file content from server (markdown, text, etc.)
+  getFileContent(chatbotName: string, fileName: string): Observable<string> {
+    const url = `http://127.0.0.1:8000/${chatbotName}/file/${fileName}`;
+    return this.http.get(url, { responseType: 'text' });
   }
 }
