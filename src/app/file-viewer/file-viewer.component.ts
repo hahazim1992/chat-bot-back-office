@@ -25,17 +25,25 @@ export class FileViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fileType = this.getFileType(this.fileName);
-    if (this.fileType === 'text') {
-      this.loadTextFile();
-    } else if (this.fileType === 'markdown') {
-      this.loadMarkdownFile();
-    } else if (this.fileType === 'pdf') {
-      this.loadPdfFile();
-    } else if (this.fileType === 'image') {
-      this.loadImageFile();
+    if (this.data.fileContent) {
+      // If file content is passed directly (newly selected file), use it
+      this.fileContent = this.data.fileContent;
+      this.fileType = this.data.fileType;
+    } else {
+      // Otherwise, load the file from the server (edit mode)
+      this.fileType = this.getFileType(this.fileName);
+      if (this.fileType === 'text') {
+        this.loadTextFile();
+      } else if (this.fileType === 'markdown') {
+        this.loadMarkdownFile();
+      } else if (this.fileType === 'pdf') {
+        this.loadPdfFile();
+      } else if (this.fileType === 'image') {
+        this.loadImageFile();
+      }
     }
   }
+  
 
   // Detect the file type based on file extension
   getFileType(fileName: string): string {

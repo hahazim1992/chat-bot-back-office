@@ -50,15 +50,16 @@
       </div>
 
       <!-- Uploaded Files List -->
-      <div class="file-list" *ngIf="chatbotData.files && chatbotData.files.length > 0">
-        <div class="file-item" *ngFor="let file of chatbotData.files">
+      <!-- Uploaded Files List -->
+      <div class="file-list" *ngIf="getFileList().length > 0">
+        <div class="file-item" *ngFor="let fileName of getFileList()">
           <div class="file-name">
             <img src="assets/images/icons/check-solid.svg" alt="Uploaded" />
-            <span>{{ file }}</span>
+            <span>{{ fileName }}</span>
           </div>
           <div class="file-actions">
-            <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(file)" />
-            <img src="assets/images/icons/icon-view.svg" alt="View" (click)="viewFile(file)" />
+            <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(fileName)" />
+            <img src="assets/images/icons/icon-view.svg" alt="View" (click)="viewFile(fileName)" />
           </div>
         </div>
       </div>
