@@ -1,30 +1,53 @@
 <div class="chatbot-settings-container">
   <!-- Back Button and Heading -->
   <div class="header-container">
-    <img src="assets/images/icons/nav-icon-left.svg" alt="back" class="back-icon" (click)="navigateBack()" />
+    <img
+      src="assets/images/icons/nav-icon-left.svg"
+      alt="back"
+      class="back-icon"
+      (click)="navigateBack()"
+    />
     <h1>Chatbot Settings</h1>
   </div>
 
   <!-- Chatbot Form -->
   <div class="form-section">
-    <h2>{{ isEditMode ? 'Edit Chatbot' : 'Add New Chatbot' }}</h2>
+    <h2>{{ isEditMode ? "Edit Chatbot" : "Add New Chatbot" }}</h2>
 
     <!-- Chatbot Name -->
     <div class="form-group">
-      <label for="chatbotName">Chatbot Name <span class="required">*</span></label>
-      <input type="text" id="chatbotName" [(ngModel)]="chatbotData.name" [disabled]="isLoading || isEditMode" />
+      <label for="chatbotName"
+        >Chatbot Name <span class="required">*</span></label
+      >
+      <input
+        type="text"
+        id="chatbotName"
+        [(ngModel)]="chatbotData.title"
+        [disabled]="isLoading || isEditMode"
+      />
     </div>
 
     <!-- Description -->
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea id="description" [(ngModel)]="chatbotData.description" [disabled]="isLoading"></textarea>
+      <textarea
+        id="description"
+        [(ngModel)]="chatbotData.description"
+        [disabled]="isLoading"
+      ></textarea>
     </div>
 
     <!-- Answer Queries Section -->
     <div class="form-group">
-      <label for="answerQueries">How should the chatbot answer the queries?</label>
-      <textarea id="answerQueries" placeholder="Type here..." [(ngModel)]="chatbotData.instruction" [disabled]="isLoading"></textarea>
+      <label for="answerQueries"
+        >How should the chatbot answer the queries?</label
+      >
+      <textarea
+        id="answerQueries"
+        placeholder="Type here..."
+        [(ngModel)]="chatbotData.instruction"
+        [disabled]="isLoading"
+      ></textarea>
     </div>
 
     <!-- Status Selection -->
@@ -42,19 +65,28 @@
     <div class="file-upload-section">
       <h3>Knowledge Base</h3>
       <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-      
 
       <!-- Uploaded Files List -->
       <div class="file-list" *ngIf="getFileList().length > 0">
         <div class="file-item" *ngFor="let fileName of getFileList()">
           <div class="file-name">
             <img src="assets/images/icons/check-solid.svg" alt="Uploaded" />
-            <span [ngClass]="{'new-file': isNewFile(fileName)}">{{ fileName }}</span>
+            <span [ngClass]="{ 'new-file': isNewFile(fileName) }">{{
+              fileName
+            }}</span>
             <span *ngIf="isNewFile(fileName)" class="new-indicator">New</span>
           </div>
           <div class="file-actions">
-            <img src="assets/images/icons/icon-view.svg" alt="View" (click)="viewFile(fileName)" />
-            <img src="assets/images/icons/bin-icon-cherry.svg" alt="Delete" (click)="deleteFile(fileName)" />
+            <img
+              src="assets/images/icons/icon-view.svg"
+              alt="View"
+              (click)="viewFile(fileName)"
+            />
+            <img
+              src="assets/images/icons/bin-icon-cherry.svg"
+              alt="Delete"
+              (click)="deleteFile(fileName)"
+            />
           </div>
         </div>
       </div>
@@ -63,10 +95,21 @@
       <div class="upload-area">
         <div class="upload-button">
           <!-- Hidden file input -->
-          <input type="file" id="fileInput" style="display: none;" (change)="onFileSelected($event)" multiple accept=".txt, .md, .pdf" />
-          
+          <input
+            type="file"
+            id="fileInput"
+            style="display: none"
+            (change)="onFileSelected($event)"
+            multiple
+            accept=".txt, .md, .pdf"
+          />
+
           <!-- Visible image acting as the trigger -->
-          <img src="assets/images/icons/upload-icon.svg" alt="Upload" (click)="triggerFileUpload()" />
+          <img
+            src="assets/images/icons/upload-icon.svg"
+            alt="Upload"
+            (click)="triggerFileUpload()"
+          />
           <span>Select File</span>
           <p>(.txt, .md, .pdf only and less than 10MB)</p>
         </div>
@@ -74,19 +117,25 @@
     </div>
 
     <!-- Loader -->
-    <ngx-spinner 
-    bdColor="rgba(51, 51, 51, 0.8)" 
-    size="large" 
-    color="#fff" 
-    type="ball-scale-multiple" 
-    [fullScreen]="true"
-    *ngIf="isLoading">
+    <ngx-spinner
+      bdColor="rgba(51, 51, 51, 0.8)"
+      size="large"
+      color="#fff"
+      type="ball-scale-multiple"
+      [fullScreen]="true"
+      *ngIf="isLoading"
+    >
     </ngx-spinner>
 
     <!-- Save Buttons -->
     <div class="form-buttons">
-      <button class="save-button" (click)="saveChatbot()" [disabled]="!isFormValid() || isLoading">{{saveLabel}}</button>
-      <div *ngIf="isLoading" class="loader">Loading...</div>
+      <button
+        class="save-button"
+        (click)="saveChatbot()"
+        [disabled]="!isFormValid() || isLoading"
+      >
+        {{ saveLabel }}
+      </button>
     </div>
   </div>
 </div>

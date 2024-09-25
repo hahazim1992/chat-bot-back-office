@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChatbotService {
   private chatBotsUrl = 'http://127.0.0.1:8000/chatbots'; // Base URL for chatbots
   private baseUrl = 'http://127.0.0.1:8000'; // Base URL for delete file
   private createChatbotUrl = 'http://127.0.0.1:8000/create-chatbot'; // URL for POST
-  
+
   constructor(private http: HttpClient) {}
 
   // Get all chatbots
@@ -26,7 +26,8 @@ export class ChatbotService {
   // Add a new chatbot (POST)
   addChatbot(chatbot: any): Observable<any> {
     const formData = new FormData();
-    formData.append('chatbot_title', chatbot.name);
+    formData.append('chatbot_title', chatbot.title);
+    formData.append('chatbot_name', chatbot.name);
     formData.append('answerMethod', chatbot.instruction);
     formData.append('status', chatbot.status);
     formData.append('description', chatbot.description);
@@ -43,7 +44,8 @@ export class ChatbotService {
   updateChatbot(chatbot: any): Observable<any> {
     const url = `${this.baseUrl}/${chatbot.name}/save`;
     const formData = new FormData();
-    formData.append('chatbot_title', chatbot.name);
+    formData.append('chatbot_title', chatbot.title);
+    formData.append('chatbot_name', chatbot.name);
     formData.append('answerMethod', chatbot.instruction);
     formData.append('status', chatbot.status);
     formData.append('description', chatbot.description);
