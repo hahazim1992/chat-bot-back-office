@@ -93,7 +93,7 @@ export class FileViewerComponent implements OnInit {
   // Load a PDF file from the server (display in iframe/embed)
   loadPdfFile(): void {
     const apiUrl = `http://127.0.0.1:8000/${this.chatbotName}/file/${this.fileName}`;
-    this.fileContent = apiUrl; // Use the URL to load the PDF
+    this.fileContent = this.sanitizer.bypassSecurityTrustResourceUrl(apiUrl); // Sanitize the URL
   }
 
   // Load an image file from the server

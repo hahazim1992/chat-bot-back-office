@@ -43,12 +43,13 @@
         >How should the chatbot answer the queries?</label
       >
       <textarea
-        id="answerQueries"
-        placeholder="Type here..."
-        [(ngModel)]="chatbotData.instruction"
-        [disabled]="isLoading"
-      ></textarea>
-    </div>
+      #answerQueries
+      id="answerQueries"
+      placeholder="Type here..."
+      [(ngModel)]="chatbotData.instruction"
+      [disabled]="isLoading"
+      (input)="resizeTextarea(answerQueries)"
+    ></textarea>
 
     <!-- Status Selection -->
     <div class="form-group">
@@ -135,6 +136,16 @@
         [disabled]="!isFormValid() || isLoading"
       >
         {{ saveLabel }}
+      </button>
+    </div>
+
+    <!-- Try It Buttons -->
+    <div class="form-buttons">
+      <button
+        class="try-chatbot-button"
+        (click)="navigateToChatbotPlayground(chatbotData.name)"
+      >
+        Try it!
       </button>
     </div>
   </div>

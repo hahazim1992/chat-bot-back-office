@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatbotService } from '../chatbot.service';
 import { goBackOneLevel, onClickBack } from '../navigation/navigationHelper';
@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog'; // If using Angular Materi
 import { FileViewerComponent } from '../file-viewer/file-viewer.component';
 import { marked } from 'marked';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'; // Import DomSanitizer
 
 @Component({
   selector: 'app-chatbot-add-edit',
@@ -42,11 +43,14 @@ export class ChatbitAddEditComponent implements OnInit {
     private chatbotService: ChatbotService,
     private injector: Injector,
     private dialog: MatDialog,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private sanitizer: DomSanitizer // Inject DomSanitizer
   ) {
     this.route = injector.get<ActivatedRoute>(ActivatedRoute);
     this.router = injector.get<Router>(Router);
   }
+
+  @ViewChild('answerQueries') answerQueriesRef!: ElementRef<HTMLTextAreaElement>;
 
   ngOnInit(): void {
     const chatbotName = this.route.snapshot.paramMap.get('chatbot_name');
@@ -58,6 +62,12 @@ export class ChatbitAddEditComponent implements OnInit {
       this.isEditMode = false;
       this.saveLabel = 'Save';
     }
+    setTimeout(() => this.resizeTextarea(this.answerQueriesRef.nativeElement), 0);
+  }
+
+  resizeTextarea(textarea: HTMLTextAreaElement): void {
+    textarea.style.height = 'auto'; // Reset the height
+    textarea.style.height = `${textarea.scrollHeight + 20 }px`; // Set it to the scroll height
   }
 
   // Handle file selection for "add" mode
@@ -127,7 +137,7 @@ export class ChatbitAddEditComponent implements OnInit {
           reader.readAsText(newFile);
         } else {
           // For PDFs and images, use createObjectURL to display
-          const fileContent = URL.createObjectURL(newFile);
+          const fileContent = this.sanitizeFileUrl(newFile);
           this.dialog.open(FileViewerComponent, {
             width: '600px',
             data: { fileName: newFile.name, fileContent, fileType },
@@ -135,6 +145,12 @@ export class ChatbitAddEditComponent implements OnInit {
         }
       }
     }
+  }
+
+  // Sanitize the file URL
+  sanitizeFileUrl(file: File): SafeUrl {
+    const objectUrl = URL.createObjectURL(file);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(objectUrl); // Sanitize the URL
   }
 
   // Helper function to get file type from extension
@@ -293,5 +309,13 @@ export class ChatbitAddEditComponent implements OnInit {
 
   isNewFile(fileName: string): boolean {
     return this.newFiles.some((file) => file.name === fileName);
+  }
+
+  tryPlayground(): void {
+    return;
+  }
+
+  navigateToChatbotPlayground(chatbotName: string): void {
+    this.router.navigate(['/chatbots/edit', chatbotName, 'playground']);
   }
 }

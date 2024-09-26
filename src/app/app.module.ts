@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { ChatUIComponent } from './chat-ui/chat-ui.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatSelectModule } from '@angular/material/select';
     CopyRightComponent,
     HeaderComponent,
     ChatbitAddEditComponent,
-    FileViewerComponent
+    FileViewerComponent,
+    ChatUIComponent
   ],
   imports: [
     BrowserModule,
